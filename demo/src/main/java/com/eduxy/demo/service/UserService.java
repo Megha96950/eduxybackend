@@ -9,4 +9,5 @@ public interface UserService {
 	public void updateProfile(User user) throws Exception;
 
 	public void changePassword(String UserEmailId, String currentPassword, String newPassword) throws Exception;
+	public String getPasswordOfUser(String emailId) throws Exception;
 }

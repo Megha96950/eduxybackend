@@ -16,6 +16,7 @@ import com.eduxy.demo.model.User;
 
 
 
+
 @Repository(value = "userDAO")
 public class UserDAOImpl implements UserDAO {
 	
@@ -37,7 +38,7 @@ public class UserDAOImpl implements UserDAO {
 	public String getPasswordOfUser(String emailId) {
 		String password = null;
 		emailId = emailId.toLowerCase();
-		UserEntity userEntity = entityManager.find(UserEntity.class, emailId);
+		UserEntity userEntity = (UserEntity)entityManager.find(UserEntity.class, emailId);
 		if (userEntity!=null){
 			password = userEntity.getPassword();
 		}
@@ -72,6 +73,7 @@ public class UserDAOImpl implements UserDAO {
 		userEntity.setName(user.getName());
 		userEntity.setPassword(user.getPassword());
 		userEntity.setPhoneNumber(user.getPhoneNumber());
+		userEntity.setRole(user.getRole());
 		
 		entityManager.persist(userEntity);
 		
@@ -95,7 +97,21 @@ public class UserDAOImpl implements UserDAO {
 		
 	}
 
+	@Override
+	public Boolean checkAvailabilityOfEmailId(String emailId) {
+		Boolean flag = false;
+		
+		UserEntity userEntity = null;
 
+		userEntity = entityManager.find(UserEntity.class, emailId);
+	   
+		if(userEntity == null)
+			flag = true;
+		 
+		return flag;
+	}
+
+	
 
 
 	

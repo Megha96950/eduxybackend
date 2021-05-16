@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.eduxy.demo.dao.UserDAO;
 import com.eduxy.demo.model.User;
+import com.eduxy.demo.validator.UserValidator;
+
 
 
 
@@ -25,7 +27,7 @@ public class UserServiceImpl implements UserService {
 				user = userDAO.getUserByEmailId(userEmailIdFromDAO);
 		}
 		else
-			throw new Exception ("CustomerService.INVALID_CREDENTIALS");
+			throw new Exception ("UserService.INVALID_CREDENTIALS");
 		
 		return user;
 		
@@ -33,7 +35,28 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public String registerNewUser(User user) throws Exception {
-  return null;
+		String registeredWithEmailId = null;
+		
+		UserValidator.validateUser(user);
+	
+		Boolean emailAvailable = userDAO.checkAvailabilityOfEmailId(user.getEmailId().toLowerCase());
+		
+		if(emailAvailable){
+	
+				String emailIdToDB =user.getEmailId().toLowerCase();
+
+				user.setEmailId(emailIdToDB);
+
+				registeredWithEmailId = userDAO.registerNewUser(user);
+
+			}
+	
+		else{
+			throw new Exception("userService.EMAIL_ID_ALREADY_IN_USE");
+		}
+
+
+		return registeredWithEmailId;
 	}
 	
 	@Override
@@ -46,6 +69,14 @@ public class UserServiceImpl implements UserService {
 	public void changePassword(String userEmailId, String currentPassword, String newPassword)
 			throws Exception {
 
+	}
+
+	@Override
+	public String getPasswordOfUser(String emailId) throws Exception {
+	
+	    String s=userDAO.getPasswordOfUser(emailId);
+	   
+		return s;
 	}
 	
 
