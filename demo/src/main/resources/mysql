@@ -1,0 +1,33 @@
+ CREATE TABLE user_address(address_id int not null auto_increment,
+    -> contact_number varchar(10) not null,
+    -> line1 varchar(500) not null,
+    -> line2 varchar(500),
+    -> city varchar(50) not null,
+    -> state varchar(50) not null,
+    -> pin varchar(50) not null,
+    -> user_email_id varchar(50),
+    -> constraint ek_address_id_pk primary key (address_id));
+    
+
+create table student(student_id int not null auto_increment,
+    -> subject_to_study varchar(200) not null,
+    -> institute_name varchar(100) not null,
+    -> id_proof varchar(50) not null,
+    -> photo longblob not null,
+    -> user_email_id varchar(50),
+    -> constraint ek_student_id_pk primary key (student_id));
+    
+    
+create table Teacher(teacher_id int not null auto_increment,
+    -> subject_to_teach varchar(200) not null,
+    -> description varchar(500) not null,
+    -> higher_qualification varchar(100) not null,
+    -> degree_photo longblob not null,
+    ->id_proof varchar(50) not null,
+    -> id_photo longblob not null,
+    -> fees_per_student varchar(10) not null,
+    -> user_email_id varchar(50),
+    -> constraint ek_teacher_id_pk primary key (teacher_id));
+    
+    
+ 

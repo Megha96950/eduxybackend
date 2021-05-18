@@ -1,9 +1,16 @@
 package com.eduxy.demo.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
 
 @Entity
 @Table(name="user")
@@ -23,6 +30,18 @@ public class UserEntity {
 	
 	@Column(name="role")
 	private String role;
+ 
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="user_email_id")
+	private List<AddressEntity> addressEntities;
+	
+	public List<AddressEntity> getAddressEntities() {
+		return addressEntities;
+	}
+
+	public void setAddressEntities(List<AddressEntity> addressEntities) {
+		this.addressEntities = addressEntities;
+	}
 
 	public String getEmailId() {
 		return emailId;
