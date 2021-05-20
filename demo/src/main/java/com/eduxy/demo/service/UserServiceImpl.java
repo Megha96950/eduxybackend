@@ -5,8 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eduxy.demo.dao.UserDAO;
+import com.eduxy.demo.model.Address;
+import com.eduxy.demo.model.Student;
+import com.eduxy.demo.model.Teacher;
 import com.eduxy.demo.model.User;
 import com.eduxy.demo.validator.UserValidator;
+
 
 
 
@@ -66,8 +70,20 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void changePassword(String userEmailId, String currentPassword, String newPassword)
-			throws Exception {
+	public void changePassword(String userEmailId, String currentPassword, String newPassword) throws Exception {
+		Boolean validPassword = UserValidator.validatePassword(newPassword);
+		if (!validPassword)
+			throw new Exception("userService.INVALID_NEW_PASSWORD");
+		
+		String passwordFromDB = userDAO.getPasswordOfUser(userEmailId);
+		
+		if(!passwordFromDB.equals(currentPassword))
+			throw new Exception("userService.INVALID_CURRENT_PASSWORD");
+		
+		if(currentPassword.equals(newPassword))
+			throw new Exception("userService.OLD_PASSWORD_NEW_PASSWORD_SAME");
+		
+		userDAO.changePassword(userEmailId, newPassword);
 
 	}
 
@@ -79,5 +95,31 @@ public class UserServiceImpl implements UserService {
 		return s;
 	}
 	
+	@Override
+	public Integer addAddress(String userEmailId, Address address) throws Exception {
+		
+		UserValidator.validateAddress(address);
+		Integer newAddressID = userDAO.addAddress(userEmailId, address);
+		
+		return newAddressID; 
+	}
+	
+	@Override
+	public Integer addStudentDetail(String userEmailId, Student student) throws Exception{
+		//UserValidator.validateAddress(address);
+		Integer newStudentID = userDAO.addStudentDetail(userEmailId, student);
+		
+		return newStudentID; 
+		
+	}
+	
+	@Override
+	public Integer addTeacherDetail(String userEmailId, Teacher teacher) throws Exception{
+		//UserValidator.validateAddress(address);
+		Integer newStudentID = userDAO.addTeacherDetail(userEmailId, teacher);
+		
+		return newStudentID; 
+		
+	}
 
 }

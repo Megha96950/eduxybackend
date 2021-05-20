@@ -9,12 +9,14 @@ import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.eduxy.demo.entity.AddressEntity;
+import com.eduxy.demo.entity.StudentEntity;
+import com.eduxy.demo.entity.TeacherEntity;
 import com.eduxy.demo.entity.UserEntity;
+import com.eduxy.demo.model.Address;
+import com.eduxy.demo.model.Student;
+import com.eduxy.demo.model.Teacher;
 import com.eduxy.demo.model.User;
-
-
-
-
 
 
 @Repository(value = "userDAO")
@@ -51,12 +53,56 @@ public class UserDAOImpl implements UserDAO {
 		User user = null;
 	    emailId=emailId.toLowerCase();
 	    UserEntity userEntity = entityManager.find(UserEntity.class, emailId);
+	    List<Address> userAddresses = new ArrayList<>();
+	    List<Student> userStudent = new ArrayList<>();
+	    List<Teacher> userTeacher = new ArrayList<>();
+	    
 		if (userEntity!=null){
 		    user = new User();
 			user.setEmailId(userEntity.getEmailId());
 			user.setName(userEntity.getName());
 			user.setPhoneNumber(userEntity.getPhoneNumber());
 			user.setRole(userEntity.getRole());
+			for (AddressEntity i : userEntity.getAddressEntities()) {
+				Address address = new Address();
+				address.setAddressId(i.getAddressId());
+				address.setAddressLine1(i.getAddressLine1());
+				address.setAddressLine2(i.getAddressLine2());
+				address.setCity(i.getCity());
+				address.setContactNumber(i.getContactNumber());
+				address.setPin(i.getPin());
+				address.setState(i.getState());
+				
+				userAddresses.add(address);
+			}
+			user.setAddresses(userAddresses);
+			
+			for (StudentEntity i : userEntity.getStudentEntity()) {
+				Student student = new Student();
+				student.setStudentId(i.getStudentId());
+				student.setSubjects(i.getSubjects());
+				student.setIdProof(i.getIdProof());
+				student.setInstitueName(i.getInstitueName());
+				student.setPhoto(i.getPhoto());
+				
+				userStudent.add(student);
+			}
+			user.setStudent(userStudent);
+			
+			for (TeacherEntity i : userEntity.getTeacherEntity()) {
+				Teacher teacher =new Teacher();
+				teacher.setTeacherId(i.getTeacherId());
+				teacher.setSubjects(i.getSubjects());
+				teacher.setIdProof(i.getIdProof());
+				teacher.setIdPhoto(i.getIdPhoto());
+				teacher.setHigherQualification(i.getHigherQualification());
+				teacher.setFeesCharged(i.getFeesCharged());
+				teacher.setDescription(i.getDescription());
+				teacher.setDegreePhoto(i.getDegreePhoto());
+				
+				userTeacher.add(teacher);
+			}
+			user.setTeacher(userTeacher);
 		}
 			
 		
@@ -88,13 +134,18 @@ public class UserDAOImpl implements UserDAO {
 	}
 	@Override
 	public void updateProfile(User user) {
-		// TODO Auto-generated method stub
+		
+		UserEntity userEntity = entityManager.find(UserEntity.class, user.getEmailId().toLowerCase());	
+		userEntity.setName(user.getName());
+		userEntity.setPhoneNumber(user.getPhoneNumber());
 		
 	}
+	
 	@Override
 	public void changePassword(String userEmailId, String newHashedPassword) {
-		// TODO Auto-generated method stub
 		
+        UserEntity userEntity = entityManager.find(UserEntity.class, userEmailId);
+		userEntity.setPassword(newHashedPassword);
 	}
 
 	@Override
@@ -112,8 +163,97 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	
-
-
+	@Override
+	public Integer addAddress(String userEmailId, Address address) {
+		
+		UserEntity userEntity = null;
+		Integer newAddressId = null;
+		
+		userEntity = entityManager.find(UserEntity.class, userEmailId);
+		
+		List<AddressEntity> userAddressEntities = userEntity.getAddressEntities();
+		
+		AddressEntity newAddress = new AddressEntity();
+		newAddress.setAddressLine1(address.getAddressLine1());
+		newAddress.setAddressLine2(address.getAddressLine2());
+		newAddress.setCity(address.getCity());
+		newAddress.setContactNumber(address.getContactNumber());
+		newAddress.setPin(address.getPin());
+		newAddress.setState(address.getState());
+		
+		userAddressEntities.add(newAddress);
+		userEntity.setAddressEntities(userAddressEntities);
+		
+		entityManager.persist(userEntity);
+		
+		
+		List<AddressEntity> customerAddressEntitiesAfterAddition = userEntity.getAddressEntities();
+		
+		AddressEntity addressEntity = customerAddressEntitiesAfterAddition.get(customerAddressEntitiesAfterAddition.size()-1);
+		newAddressId = addressEntity.getAddressId();
+		return newAddressId;
+		
+	}
 	
+	@Override
+	public Integer addStudentDetail(String userEmailId, Student student) {
+		
+		UserEntity userEntity = null;
+		Integer newStudentId = null;
+		
+		userEntity = entityManager.find(UserEntity.class, userEmailId);
+		
+		List<StudentEntity> userStudentEntities = userEntity.getStudentEntity();
+		
+		StudentEntity newStudent = new StudentEntity();
+		newStudent.setSubjects(student.getSubjects());
+		newStudent.setPhoto(student.getPhoto());
+		newStudent.setIdProof(student.getIdProof());
+		newStudent.setInstitueName(student.getInstitueName());
+		
+		userStudentEntities.add(newStudent);
+		userEntity.setStudentEntity(userStudentEntities);
+		
+		entityManager.persist(userEntity);
+		
+		
+		List<StudentEntity> userStudentEntitiesAfterAddition = userEntity.getStudentEntity();
+		
+		StudentEntity studentEntity = userStudentEntitiesAfterAddition.get(userStudentEntitiesAfterAddition.size()-1);
+		newStudentId = studentEntity.getStudentId();
+		return newStudentId;
+		
+	}
+
+	@Override
+	public Integer addTeacherDetail(String userEmailId, Teacher teacher) {
+		UserEntity userEntity = null;
+		Integer newTeacherId = null;
+		
+		userEntity = entityManager.find(UserEntity.class, userEmailId);
+		
+		List<TeacherEntity> userTeacherEntities = userEntity.getTeacherEntity();
+		
+		TeacherEntity newTeacher = new TeacherEntity();
+		newTeacher.setSubjects(teacher.getSubjects());
+		newTeacher.setIdProof(teacher.getIdProof());
+		newTeacher.setIdPhoto(teacher.getIdPhoto());
+		newTeacher.setHigherQualification(teacher.getHigherQualification());
+		newTeacher.setFeesCharged(teacher.getFeesCharged());
+		newTeacher.setDescription(teacher.getDescription());
+		newTeacher.setDegreePhoto(teacher.getDegreePhoto());
+		
+		userTeacherEntities.add(newTeacher);
+		userEntity.setTeacherEntity(userTeacherEntities);
+		
+		entityManager.persist(userEntity);
+		
+		
+		List<TeacherEntity> userTeacherEntitiesAfterAddition = userEntity.getTeacherEntity();
+		
+		TeacherEntity teacherEntity = userTeacherEntitiesAfterAddition.get(userTeacherEntitiesAfterAddition.size()-1);
+		newTeacherId = teacherEntity.getTeacherId();
+		return newTeacherId;
+	}
 
 }

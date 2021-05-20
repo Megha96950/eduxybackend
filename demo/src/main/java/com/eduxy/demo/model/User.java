@@ -1,5 +1,9 @@
 package com.eduxy.demo.model;
 
+import java.util.List;
+
+
+
 public class User {
 	private String emailId;
 	private String name;
@@ -7,6 +11,30 @@ public class User {
 	private String newPassword;
 	private String phoneNumber;
 	private String role;
+	private List<Address> addresses;
+	private List<Student> student;
+	private List<Teacher> teacher;
+	
+	
+	
+	public List<Address> getAddresses() {
+		return addresses;
+	}
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
+	}
+	public List<Student> getStudent() {
+		return student;
+	}
+	public void setStudent(List<Student> student) {
+		this.student = student;
+	}
+	public List<Teacher> getTeacher() {
+		return teacher;
+	}
+	public void setTeacher(List<Teacher> teacher) {
+		this.teacher = teacher;
+	}
 	public String getEmailId() {
 		return emailId;
 	}

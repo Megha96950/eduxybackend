@@ -35,6 +35,31 @@ public class UserEntity {
 	@JoinColumn(name="user_email_id")
 	private List<AddressEntity> addressEntities;
 	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="user_email_id")
+	private List<StudentEntity> studentEntity;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="user_email_id")
+	private List<TeacherEntity> teacherEntity;
+	
+	
+	public List<StudentEntity> getStudentEntity() {
+		return studentEntity;
+	}
+
+	public void setStudentEntity(List<StudentEntity> studentEntity) {
+		this.studentEntity = studentEntity;
+	}
+
+	public List<TeacherEntity> getTeacherEntity() {
+		return teacherEntity;
+	}
+
+	public void setTeacherEntity(List<TeacherEntity> teacherEntity) {
+		this.teacherEntity = teacherEntity;
+	}
+
 	public List<AddressEntity> getAddressEntities() {
 		return addressEntities;
 	}

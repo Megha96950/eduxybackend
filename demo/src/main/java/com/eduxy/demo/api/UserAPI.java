@@ -20,6 +20,7 @@ import com.eduxy.demo.service.UserService;
 
 
 
+
 @CrossOrigin
 @RestController
 @RequestMapping("UserAPI")
@@ -70,4 +71,19 @@ public class UserAPI {
 		}
 	}
 	
+	@PostMapping(value = "changePassword")
+	public ResponseEntity<String> changePassword(@RequestBody User user) throws Exception {
+
+		try
+		{
+			userService.changePassword(user.getEmailId(), user.getPassword(), user.getNewPassword());
+			String modificationSuccessMsg = environment.getProperty("userAPI.CUSTOMER_PASSWORD_CHANGE_SUCCESS");
+			return new ResponseEntity<String>(modificationSuccessMsg, HttpStatus.OK);
+			
+		}
+		catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.FORBIDDEN, environment.getProperty(e.getMessage()));
+		}
+
+	}
 }

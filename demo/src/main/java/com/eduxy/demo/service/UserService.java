@@ -1,5 +1,8 @@
 package com.eduxy.demo.service;
 
+import com.eduxy.demo.model.Address;
+import com.eduxy.demo.model.Student;
+import com.eduxy.demo.model.Teacher;
 import com.eduxy.demo.model.User;
 
 public interface UserService {
@@ -10,4 +13,8 @@ public interface UserService {
 
 	public void changePassword(String UserEmailId, String currentPassword, String newPassword) throws Exception;
 	public String getPasswordOfUser(String emailId) throws Exception;
+	
+	public Integer addAddress(String customerEmailId, Address address) throws Exception;
+	public Integer addStudentDetail(String customerEmailId, Student student) throws Exception;
+	public Integer addTeacherDetail(String userEmailId, Teacher teacher) throws Exception;
 }
