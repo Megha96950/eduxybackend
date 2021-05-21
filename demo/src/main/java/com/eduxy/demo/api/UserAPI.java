@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.eduxy.demo.model.Address;
+import com.eduxy.demo.model.Student;
+import com.eduxy.demo.model.Teacher;
 import com.eduxy.demo.model.User;
 import com.eduxy.demo.service.UserService;
 
@@ -89,8 +91,8 @@ public class UserAPI {
 
 	}
 	
-	@PostMapping(value = "addNewAddress/{customerEmailId:.+}")
-	public ResponseEntity<String> addNewAddress(@RequestBody Address address, @PathVariable("customerEmailId") String customerEmailId) throws Exception {
+	@PostMapping(value = "addNewAddress/{userEmailId:.+}")
+	public ResponseEntity<String> addNewAddress(@RequestBody Address address, @PathVariable("userEmailId") String customerEmailId) throws Exception {
 		int addressId;
 		
 		try
@@ -98,6 +100,43 @@ public class UserAPI {
 			addressId = userService.addAddress(customerEmailId,address);
 			String message=environment.getProperty("userAPI.NEW_SHIPPING_ADDRESS_ADDED_SUCCESS");
 			String toReturn = message+addressId;
+			
+			toReturn = toReturn.trim();
+			return new ResponseEntity<String>(toReturn, HttpStatus.OK);
+		}
+		catch (Exception e) {
+			
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, environment.getProperty(e.getMessage()));
+		  }	
+		}
+	@PostMapping(value = "addStudent/{userEmailId:.+}")
+	public ResponseEntity<String> addStudentDetail(@RequestBody Student student, @PathVariable("userEmailId") String customerEmailId) throws Exception {
+		int studentId;
+		
+		try
+		{
+			studentId = userService.addStudentDetail(customerEmailId,student);
+			String message=environment.getProperty("userAPI.STUDENT_ADDED_SUCCESS");
+			String toReturn = message+studentId;
+			
+			toReturn = toReturn.trim();
+			return new ResponseEntity<String>(toReturn, HttpStatus.OK);
+		}
+		catch (Exception e) {
+			
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, environment.getProperty(e.getMessage()));
+		  }	
+		}
+	
+	@PostMapping(value = "addTeacher/{userEmailId:.+}")
+	public ResponseEntity<String> addTeacherDetail(@RequestBody Teacher teacher, @PathVariable("userEmailId") String customerEmailId) throws Exception {
+		int studentId;
+		
+		try
+		{
+			studentId = userService.addTeacherDetail(customerEmailId,teacher);
+			String message=environment.getProperty("userAPI.TEACHER_ADDED_SUCCESS");
+			String toReturn = message+studentId;
 			
 			toReturn = toReturn.trim();
 			return new ResponseEntity<String>(toReturn, HttpStatus.OK);

@@ -5,10 +5,10 @@ import javax.persistence.Column;
 public class Student {
 	
     private int StudentId;
-	private String Subjects;
-	private String InstitueName;
-	private String IdProof;
-	private String Photo;
+	private String subjects;
+	private String institueName;
+	private String idProof;
+	private String photo;
 	
 	
 	public int getStudentId() {
@@ -18,28 +18,28 @@ public class Student {
 		StudentId = studentId;
 	}
 	public String getSubjects() {
-		return Subjects;
+		return subjects;
 	}
 	public void setSubjects(String subjects) {
-		Subjects = subjects;
+		this.subjects = subjects;
 	}
 	public String getInstitueName() {
-		return InstitueName;
+		return institueName;
 	}
 	public void setInstitueName(String institueName) {
-		InstitueName = institueName;
+		this.institueName = institueName;
 	}
 	public String getIdProof() {
-		return IdProof;
+		return idProof;
 	}
 	public void setIdProof(String idProof) {
-		IdProof = idProof;
+		this.idProof = idProof;
 	}
 	public String getPhoto() {
-		return Photo;
+		return photo;
 	}
 	public void setPhoto(String photo) {
-		Photo = photo;
+		this.photo = photo;
 	}
 	
 	

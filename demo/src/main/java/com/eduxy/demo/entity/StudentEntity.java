@@ -14,58 +14,58 @@ public class StudentEntity {
 	@Id
 	@Column(name="student_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int StudentId;
+	private int studentId;
 	
 	@Column(name="subject_to_study")
-	private String Subjects;
+	private String subjects;
 	
 	@Column(name="institute_name")
-	private String InstitueName;
+	private String instituteName;
 	
 	@Column(name="id_proof")
-	private String IdProof;
+	private String idProof;
 	
 	@Column(name="photo")
-	private String Photo;
+	private String photo;
 
 	public int getStudentId() {
-		return StudentId;
+		return studentId;
 	}
 
 	public void setStudentId(int studentId) {
-		StudentId = studentId;
+        this.studentId = studentId;
 	}
 
 	public String getSubjects() {
-		return Subjects;
+		return subjects;
 	}
 
 	public void setSubjects(String subjects) {
-		Subjects = subjects;
+		this.subjects = subjects;
 	}
 
-	public String getInstitueName() {
-		return InstitueName;
+	public String getInstituteName() {
+		return instituteName;
 	}
 
-	public void setInstitueName(String institueName) {
-		InstitueName = institueName;
+	public void setInstitueName(String instituteName) {
+		this.instituteName = instituteName;
 	}
 
 	public String getIdProof() {
-		return IdProof;
+		return idProof;
 	}
 
 	public void setIdProof(String idProof) {
-		IdProof = idProof;
+		this.idProof = idProof;
 	}
 
 	public String getPhoto() {
-		return Photo;
+		return photo;
 	}
 
 	public void setPhoto(String photo) {
-		Photo = photo;
+		this.photo = photo;
 	}
 	
 	

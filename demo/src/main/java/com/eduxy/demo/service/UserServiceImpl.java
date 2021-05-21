@@ -71,8 +71,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void changePassword(String userEmailId, String currentPassword, String newPassword) throws Exception {
-		System.out.println();
-		System.out.println(currentPassword);
+		
 		Boolean validPassword = UserValidator.validatePassword(newPassword);
 		
 		if (!validPassword)
@@ -102,6 +101,7 @@ public class UserServiceImpl implements UserService {
 	public Integer addAddress(String userEmailId, Address address) throws Exception {
 		
 		UserValidator.validateAddress(address);
+		
 		Integer newAddressID = userDAO.addAddress(userEmailId, address);
 		
 		return newAddressID; 

@@ -82,7 +82,7 @@ public class UserDAOImpl implements UserDAO {
 				student.setStudentId(i.getStudentId());
 				student.setSubjects(i.getSubjects());
 				student.setIdProof(i.getIdProof());
-				student.setInstitueName(i.getInstitueName());
+				student.setInstitueName(i.getInstituteName());
 				student.setPhoto(i.getPhoto());
 				
 				userStudent.add(student);
@@ -170,7 +170,7 @@ public class UserDAOImpl implements UserDAO {
 		Integer newAddressId = null;
 		
 		userEntity = entityManager.find(UserEntity.class, userEmailId);
-		
+	
 		List<AddressEntity> userAddressEntities = userEntity.getAddressEntities();
 		
 		AddressEntity newAddress = new AddressEntity();
@@ -209,6 +209,7 @@ public class UserDAOImpl implements UserDAO {
 		newStudent.setSubjects(student.getSubjects());
 		newStudent.setPhoto(student.getPhoto());
 		newStudent.setIdProof(student.getIdProof());
+		System.out.println(student.getPhoto());
 		newStudent.setInstitueName(student.getInstitueName());
 		
 		userStudentEntities.add(newStudent);
