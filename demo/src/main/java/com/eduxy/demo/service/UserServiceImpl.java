@@ -71,7 +71,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void changePassword(String userEmailId, String currentPassword, String newPassword) throws Exception {
+		System.out.println();
+		System.out.println(currentPassword);
 		Boolean validPassword = UserValidator.validatePassword(newPassword);
+		
 		if (!validPassword)
 			throw new Exception("userService.INVALID_NEW_PASSWORD");
 		

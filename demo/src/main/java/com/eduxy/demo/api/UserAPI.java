@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.eduxy.demo.model.Address;
 import com.eduxy.demo.model.User;
 import com.eduxy.demo.service.UserService;
+
 
 
 
@@ -55,7 +57,7 @@ public class UserAPI {
 		try
 		{
 			logger.info("CUSTOMER TRYING TO REGISTER. CUSTOMER EMAIL ID: "+user.getEmailId());
-		//	System.out.println("detiuhkj");
+	
 			String registeredWithEmailID = userService.registerNewUser(user);
 			
 			registeredWithEmailID = environment.getProperty("userAPI.CUSTOMER_REGISTRATION_SUCCESS")+registeredWithEmailID;
@@ -86,4 +88,23 @@ public class UserAPI {
 		}
 
 	}
+	
+	@PostMapping(value = "addNewAddress/{customerEmailId:.+}")
+	public ResponseEntity<String> addNewAddress(@RequestBody Address address, @PathVariable("customerEmailId") String customerEmailId) throws Exception {
+		int addressId;
+		
+		try
+		{
+			addressId = userService.addAddress(customerEmailId,address);
+			String message=environment.getProperty("userAPI.NEW_SHIPPING_ADDRESS_ADDED_SUCCESS");
+			String toReturn = message+addressId;
+			
+			toReturn = toReturn.trim();
+			return new ResponseEntity<String>(toReturn, HttpStatus.OK);
+		}
+		catch (Exception e) {
+			
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, environment.getProperty(e.getMessage()));
+		  }	
+		}
 }
