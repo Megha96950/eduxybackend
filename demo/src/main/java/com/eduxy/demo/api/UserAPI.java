@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.eduxy.demo.model.Address;
@@ -146,4 +149,17 @@ public class UserAPI {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, environment.getProperty(e.getMessage()));
 		  }	
 		}
+	
+	 @PostMapping("/upload")
+	 
+	     public BodyBuilder uplaodImage(@RequestParam("id_photo") MultipartFile idPhoto,@RequestParam("degree_photo") MultipartFile degree_Photo) throws Exception {
+	
+	 
+	         System.out.println("Original Image Byte Size - " + idPhoto.getBytes().length);
+	 
+	         
+	 
+	         return ResponseEntity.status(HttpStatus.OK);
+	 
+	     }
 }

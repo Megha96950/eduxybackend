@@ -1,10 +1,15 @@
 package com.eduxy.demo.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -14,71 +19,81 @@ public class TeacherEntity {
 	@Id
 	@Column(name="teacher_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int TeacherId;
+	private int teacherId;
 	
 	@Column(name="subject_to_teach")
-	private String Subjects;
+	private String subjects;
 	
 	@Column(name="description")
-	private String Description;
+	private String description;
 	
 	@Column(name="higher_qualification")
-	private String HigherQualification;
+	private String higherQualification;
 	
 	@Column(name="id_proof")
-	private String IdProof;
+	private String idProof;
 	
 	@Column(name="degree_photo")
-	private String DegreePhoto;
+	private byte[] DegreePhoto;
 	
 	@Column(name="id_photo")
-	private String IdPhoto;
+	private byte[] idPhoto;
 	
 	@Column(name="fees_per_student")
 	private String feesCharged;
 	
-	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="teacher_id")
+	private List<TeacherData> data;
+
+	public List<TeacherData> getData() {
+		return data;
+	}
+	public void setData(List<TeacherData> data) {
+		this.data = data;
+	}
 	public int getTeacherId() {
-		return TeacherId;
+		return teacherId;
 	}
 	public void setTeacherId(int teacherId) {
-		TeacherId = teacherId;
+		this.teacherId = teacherId;
 	}
 	public String getSubjects() {
-		return Subjects;
+		return subjects;
 	}
 	public void setSubjects(String subjects) {
-		Subjects = subjects;
+		this.subjects = subjects;
 	}
 	public String getDescription() {
-		return Description;
+		return description;
 	}
 	public void setDescription(String description) {
-		Description = description;
+		this.description = description;
 	}
 	public String getHigherQualification() {
-		return HigherQualification;
+		return higherQualification;
 	}
 	public void setHigherQualification(String higherQualification) {
-		HigherQualification = higherQualification;
+		this.higherQualification = higherQualification;
 	}
 	public String getIdProof() {
-		return IdProof;
+		return idProof;
 	}
 	public void setIdProof(String idProof) {
-		IdProof = idProof;
+		this.idProof = idProof;
 	}
-	public String getDegreePhoto() {
+	
+	public byte[] getDegreePhoto() {
 		return DegreePhoto;
 	}
-	public void setDegreePhoto(String degreePhoto) {
+	public void setDegreePhoto(byte[] degreePhoto) {
 		DegreePhoto = degreePhoto;
 	}
-	public String getIdPhoto() {
-		return IdPhoto;
+	public byte[] getIdPhoto() {
+		return idPhoto;
 	}
-	public void setIdPhoto(String idPhoto) {
-		IdPhoto = idPhoto;
+	public void setIdPhoto(byte[] idPhoto) {
+		this.idPhoto = idPhoto;
 	}
 	public String getFeesCharged() {
 		return feesCharged;

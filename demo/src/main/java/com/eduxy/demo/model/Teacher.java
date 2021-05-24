@@ -1,58 +1,58 @@
 package com.eduxy.demo.model;
 
-import javax.persistence.Column;
-
 public class Teacher {
 
-    private int TeacherId;
-	private String Subjects;
-	private String Description;
-	private String HigherQualification;
-	private String IdProof;
-	private String DegreePhoto;
-	private String IdPhoto;
+    private int teacherId;
+	private String subjects;
+	private String description;
+	private String higherQualification;
+	private String idProof;
+	private byte[] degreePhoto;
+	private byte[] idPhoto;
 	private String feesCharged;
+	
 	public int getTeacherId() {
-		return TeacherId;
+		return teacherId;
 	}
 	public void setTeacherId(int teacherId) {
-		TeacherId = teacherId;
+		this.teacherId = teacherId;
 	}
 	public String getSubjects() {
-		return Subjects;
+		return subjects;
 	}
 	public void setSubjects(String subjects) {
-		Subjects = subjects;
+		this.subjects = subjects;
 	}
 	public String getDescription() {
-		return Description;
+		return description;
 	}
 	public void setDescription(String description) {
-		Description = description;
+		this.description = description;
 	}
 	public String getHigherQualification() {
-		return HigherQualification;
+		return higherQualification;
 	}
 	public void setHigherQualification(String higherQualification) {
-		HigherQualification = higherQualification;
+		this.higherQualification = higherQualification;
 	}
 	public String getIdProof() {
-		return IdProof;
+		return idProof;
 	}
 	public void setIdProof(String idProof) {
-		IdProof = idProof;
+		this.idProof = idProof;
 	}
-	public String getDegreePhoto() {
-		return DegreePhoto;
+	
+	public byte[] getDegreePhoto() {
+		return degreePhoto;
 	}
-	public void setDegreePhoto(String degreePhoto) {
-		DegreePhoto = degreePhoto;
+	public void setDegreePhoto(byte[] degreePhoto) {
+		this.degreePhoto = degreePhoto;
 	}
-	public String getIdPhoto() {
-		return IdPhoto;
+	public byte[] getIdPhoto() {
+		return idPhoto;
 	}
-	public void setIdPhoto(String idPhoto) {
-		IdPhoto = idPhoto;
+	public void setIdPhoto(byte[] idPhoto) {
+		this.idPhoto = idPhoto;
 	}
 	public String getFeesCharged() {
 		return feesCharged;
