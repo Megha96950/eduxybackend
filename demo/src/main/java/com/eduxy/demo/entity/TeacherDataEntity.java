@@ -9,19 +9,28 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="teacherData")
-public class TeacherData {
+public class TeacherDataEntity {
 
-	
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private int id;
+	
 	@Column(name="degree_photo")
 	private byte[] DegreePhoto;
 	
 	@Column(name="id_photo")
 	private byte[] idPhoto;
+    
+	
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public byte[] getDegreePhoto() {
 		return DegreePhoto;
 	}
@@ -37,6 +46,4 @@ public class TeacherData {
 	public void setIdPhoto(byte[] idPhoto) {
 		this.idPhoto = idPhoto;
 	}
-	
-	
 }

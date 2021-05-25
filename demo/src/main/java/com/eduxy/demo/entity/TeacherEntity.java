@@ -44,12 +44,12 @@ public class TeacherEntity {
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="teacher_id")
-	private List<TeacherData> data;
+	private List<TeacherDataEntity> data;
 
-	public List<TeacherData> getData() {
+	public List<TeacherDataEntity> getData() {
 		return data;
 	}
-	public void setData(List<TeacherData> data) {
+	public void setData(List<TeacherDataEntity> data) {
 		this.data = data;
 	}
 	public int getTeacherId() {

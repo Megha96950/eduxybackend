@@ -113,12 +113,12 @@ public class UserAPI {
 		  }	
 		}
 	@PostMapping(value = "addStudent/{userEmailId:.+}")
-	public ResponseEntity<String> addStudentDetail(@RequestBody Student student, @PathVariable("userEmailId") String customerEmailId) throws Exception {
+	public ResponseEntity<String> addStudentDetail(@RequestBody Student student, @PathVariable("userEmailId") String userEmailId) throws Exception {
 		int studentId;
 		
 		try
 		{
-			studentId = userService.addStudentDetail(customerEmailId,student);
+			studentId = userService.addStudentDetail(userEmailId,student);
 			String message=environment.getProperty("userAPI.STUDENT_ADDED_SUCCESS");
 			String toReturn = message+studentId;
 			
@@ -132,12 +132,12 @@ public class UserAPI {
 		}
 	
 	@PostMapping(value = "addTeacher/{userEmailId:.+}")
-	public ResponseEntity<String> addTeacherDetail(@RequestBody Teacher teacher, @PathVariable("userEmailId") String customerEmailId) throws Exception {
+	public ResponseEntity<String> addTeacherDetail(@RequestBody Teacher teacher, @PathVariable("userEmailId") String userEmailId) throws Exception {
 		int studentId;
 		
 		try
 		{
-			studentId = userService.addTeacherDetail(customerEmailId,teacher);
+			studentId = userService.addTeacherDetail(userEmailId,teacher);
 			String message=environment.getProperty("userAPI.TEACHER_ADDED_SUCCESS");
 			String toReturn = message+studentId;
 			
@@ -150,16 +150,5 @@ public class UserAPI {
 		  }	
 		}
 	
-	 @PostMapping("/upload")
-	 
-	     public BodyBuilder uplaodImage(@RequestParam("id_photo") MultipartFile idPhoto,@RequestParam("degree_photo") MultipartFile degree_Photo) throws Exception {
 	
-	 
-	         System.out.println("Original Image Byte Size - " + idPhoto.getBytes().length);
-	 
-	         
-	 
-	         return ResponseEntity.status(HttpStatus.OK);
-	 
-	     }
 }
