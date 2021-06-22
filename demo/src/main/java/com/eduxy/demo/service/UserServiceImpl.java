@@ -3,6 +3,8 @@ package com.eduxy.demo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.eduxy.demo.dao.UserDAO;
 import com.eduxy.demo.model.Address;
@@ -117,7 +119,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public Integer addTeacherDetail(String userEmailId, Teacher teacher) throws Exception{
+	public Integer addTeacherDetail(String userEmailId, Teacher teacher) {
 		//UserValidator.validateAddress(address);
 		Integer newStudentID = userDAO.addTeacherDetail(userEmailId, teacher);
 		

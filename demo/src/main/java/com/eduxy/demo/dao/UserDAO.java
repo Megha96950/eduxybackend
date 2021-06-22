@@ -1,5 +1,7 @@
 package com.eduxy.demo.dao;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.eduxy.demo.model.Address;
 import com.eduxy.demo.model.Student;
 import com.eduxy.demo.model.Teacher;

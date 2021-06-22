@@ -17,13 +17,14 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.eduxy.demo.service.TeacherService;
 
+
 @CrossOrigin
 @RestController
 @RequestMapping("TeacherAPI")
 public class TeacherAPI {
 
 	 @Autowired
-	 TeacherService teacherService;
+	 private TeacherService teacherService;
 	 
 	 @Autowired
 	 private Environment environment;

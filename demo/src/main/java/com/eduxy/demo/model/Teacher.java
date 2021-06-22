@@ -1,5 +1,7 @@
 package com.eduxy.demo.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Teacher {
 
     private int teacherId;
@@ -10,6 +12,9 @@ public class Teacher {
 	private byte[] degreePhoto;
 	private byte[] idPhoto;
 	private String feesCharged;
+	
+	
+	
 	
 	public int getTeacherId() {
 		return teacherId;
@@ -41,6 +46,8 @@ public class Teacher {
 	public void setIdProof(String idProof) {
 		this.idProof = idProof;
 	}
+	
+	
 	
 	public byte[] getDegreePhoto() {
 		return degreePhoto;

@@ -1,5 +1,7 @@
 package com.eduxy.demo.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.eduxy.demo.model.Address;
 import com.eduxy.demo.model.Student;
 import com.eduxy.demo.model.Teacher;
@@ -16,5 +18,5 @@ public interface UserService {
 	
 	public Integer addAddress(String customerEmailId, Address address) throws Exception;
 	public Integer addStudentDetail(String customerEmailId, Student student) throws Exception;
-	public Integer addTeacherDetail(String userEmailId, Teacher teacher) throws Exception;
+	public Integer addTeacherDetail(String userEmailId, Teacher teacher);
 }

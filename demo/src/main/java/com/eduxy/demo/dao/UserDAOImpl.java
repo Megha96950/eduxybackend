@@ -1,5 +1,6 @@
 package com.eduxy.demo.dao;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.eduxy.demo.entity.AddressEntity;
 import com.eduxy.demo.entity.StudentEntity;
@@ -89,20 +91,21 @@ public class UserDAOImpl implements UserDAO {
 			}
 			user.setStudent(userStudent);
 			
-			for (TeacherEntity i : userEntity.getTeacherEntity()) {
-				Teacher teacher =new Teacher();
-				teacher.setTeacherId(i.getTeacherId());
-				teacher.setSubjects(i.getSubjects());
-				teacher.setIdProof(i.getIdProof());
-				teacher.setIdPhoto(i.getIdPhoto());
-				teacher.setHigherQualification(i.getHigherQualification());
-				teacher.setFeesCharged(i.getFeesCharged());
-				teacher.setDescription(i.getDescription());
-				teacher.setDegreePhoto(i.getDegreePhoto());
-				
-				userTeacher.add(teacher);
-			}
-			user.setTeacher(userTeacher);
+//			for (TeacherEntity i : userEntity.getTeacherEntity()) {
+//				Teacher teacher =new Teacher();
+//				teacher.setTeacherId(i.getTeacherId());
+//				teacher.setSubjects(i.getSubjects());
+//				teacher.setIdProof(i.getIdProof());
+//				teacher.setIdPhoto(i.getIdPhoto()
+//						);
+//				teacher.setHigherQualification(i.getHigherQualification());
+//				teacher.setFeesCharged(i.getFeesCharged());
+//				teacher.setDescription(i.getDescription());
+//				teacher.setDegreePhoto(i.getDegreePhoto());
+//				
+//				userTeacher.add(teacher);
+//			}
+//			user.setTeacher(userTeacher);
 		}
 			
 		
@@ -238,11 +241,11 @@ public class UserDAOImpl implements UserDAO {
 		TeacherEntity newTeacher = new TeacherEntity();
 		newTeacher.setSubjects(teacher.getSubjects());
 		newTeacher.setIdProof(teacher.getIdProof());
-		newTeacher.setIdPhoto(teacher.getIdPhoto());
+		//newTeacher.setIdPhoto(idPhoto.getBytes());
 		newTeacher.setHigherQualification(teacher.getHigherQualification());
 		newTeacher.setFeesCharged(teacher.getFeesCharged());
 		newTeacher.setDescription(teacher.getDescription());
-		newTeacher.setDegreePhoto(teacher.getDegreePhoto());
+		//newTeacher.setDegreePhoto(degreePhoto.getBytes());
 		
 		userTeacherEntities.add(newTeacher);
 		userEntity.setTeacherEntity(userTeacherEntities);
