@@ -15,9 +15,10 @@ public class TeacherServiceImpl implements TeacherService{
 	TeacherDAO teacherDAO;
 	
 	@Override
-	public Integer upload(String userEmailId, MultipartFile idPhoto, MultipartFile degreePhoto) throws Exception {
+	public Integer upload(String userEmailId, MultipartFile idPhoto) throws Exception {
 		
-        Integer dataID = teacherDAO.upload(userEmailId , idPhoto.getBytes(), degreePhoto.getBytes()) ;
+        Integer dataID = teacherDAO.upload(userEmailId , idPhoto.getBytes()) ;
+       
 		return dataID;
 		
 	}

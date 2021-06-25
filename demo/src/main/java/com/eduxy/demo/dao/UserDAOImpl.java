@@ -230,7 +230,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public Integer addTeacherDetail(String userEmailId, Teacher teacher) {
+	public Integer addTeacherDetail(String userEmailId, Teacher teacher) throws Exception {
 		UserEntity userEntity = null;
 		Integer newTeacherId = null;
 		
@@ -241,7 +241,7 @@ public class UserDAOImpl implements UserDAO {
 		TeacherEntity newTeacher = new TeacherEntity();
 		newTeacher.setSubjects(teacher.getSubjects());
 		newTeacher.setIdProof(teacher.getIdProof());
-		//newTeacher.setIdPhoto(idPhoto.getBytes());
+		newTeacher.setIdPhoto(teacher.getIdPhoto().getBytes());
 		newTeacher.setHigherQualification(teacher.getHigherQualification());
 		newTeacher.setFeesCharged(teacher.getFeesCharged());
 		newTeacher.setDescription(teacher.getDescription());

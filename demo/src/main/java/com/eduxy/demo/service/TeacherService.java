@@ -4,6 +4,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface TeacherService {
 	
-	public Integer upload(String userEmailId,MultipartFile idPhoto,MultipartFile degreePhoto)throws Exception;
+	public Integer upload(String userEmailId,MultipartFile idPhoto)throws Exception;
 
 }

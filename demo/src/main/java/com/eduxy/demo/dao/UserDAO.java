@@ -20,6 +20,6 @@ public interface UserDAO {
 	public void changePassword(String userEmailId, String newHashedPassword);
 	public Integer addAddress(String userEmailId, Address address);
 	public Integer addStudentDetail(String userEmailId, Student student);
-	public Integer addTeacherDetail(String userEmailId, Teacher teacher);
+	public Integer addTeacherDetail(String userEmailId, Teacher teacher)throws Exception;
 
 }

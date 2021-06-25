@@ -119,7 +119,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public Integer addTeacherDetail(String userEmailId, Teacher teacher) {
+	public Integer addTeacherDetail(String userEmailId, Teacher teacher) throws Exception {
 		//UserValidator.validateAddress(address);
 		Integer newStudentID = userDAO.addTeacherDetail(userEmailId, teacher);
 		
