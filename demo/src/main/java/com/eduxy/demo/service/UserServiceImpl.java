@@ -1,5 +1,9 @@
 package com.eduxy.demo.service;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.zip.Deflater;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -121,10 +125,21 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Integer addTeacherDetail(String userEmailId, Teacher teacher) throws Exception {
 		//UserValidator.validateAddress(address);
-		Integer newStudentID = userDAO.addTeacherDetail(userEmailId, teacher);
+		User user = null;
+		Integer newTeacherID = userDAO.addTeacherDetail(userEmailId, teacher);
+//		if(newTeacherID!=null){
+//			
+//			user = userDAO.getUserByEmailId(userEmailId);
+//	}
+//	else
+//		throw new Exception ("UserService.INVALID_CREDENTIALS");
+//	
+//	return user;
 		
-		return newStudentID; 
+		return newTeacherID;
+		
 		
 	}
+	
 
 }

@@ -132,18 +132,16 @@ public class UserAPI {
 		}
 	
 	@PostMapping(value = "addTeacher/{userEmailId:.+}")
-	public ResponseEntity<String> addTeacherDetail(@RequestBody Teacher teacher, @PathVariable("userEmailId") String userEmailId ) throws Exception {
-		int studentId;
+	public ResponseEntity<Integer> addTeacherDetail(@RequestBody Teacher teacher, @PathVariable("userEmailId") String userEmailId ) throws Exception {
+		
 		System.out.print("fygjhgj");
 		try
 		{
 		
-			studentId = userService.addTeacherDetail(userEmailId,teacher);
+			Integer teacherID = userService.addTeacherDetail(userEmailId,teacher);
 			String message=environment.getProperty("userAPI.TEACHER_ADDED_SUCCESS");
-			String toReturn = message+studentId;
 			
-			toReturn = toReturn.trim();
-			return new ResponseEntity<String>(toReturn, HttpStatus.OK);
+			return new ResponseEntity<Integer>(teacherID, HttpStatus.OK);
 		}
 		catch (Exception e) {
 			

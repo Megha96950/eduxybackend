@@ -10,7 +10,7 @@ public class Teacher {
 	private String higherQualification;
 	private String idProof;
 	private byte[] degreePhoto;
-	private MultipartFile idPhoto;
+	private byte[] idPhoto;
 	private String feesCharged;
 	
 	
@@ -56,10 +56,11 @@ public class Teacher {
 		this.degreePhoto = degreePhoto;
 	}
 	
-	public MultipartFile getIdPhoto() {
+	
+	public byte[] getIdPhoto() {
 		return idPhoto;
 	}
-	public void setIdPhoto(MultipartFile idPhoto) {
+	public void setIdPhoto(byte[] idPhoto) {
 		this.idPhoto = idPhoto;
 	}
 	public String getFeesCharged() {

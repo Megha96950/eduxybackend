@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.eduxy.demo.model.User;
 import com.eduxy.demo.service.TeacherService;
 
 
@@ -31,22 +32,50 @@ public class TeacherAPI {
 		
 	 static Logger logger = LogManager.getLogger(UserAPI.class.getName());
 	 
-	 @PostMapping("/upload/{userEmailId:.+}")
+	 @PostMapping("/uploadId/{userEmailId:.+}/{id:.+}")
 	 
-     public ResponseEntity<String> uplaodImage(@PathVariable("userEmailId") String userEmailId,@RequestParam("id_Photo") MultipartFile idPhoto) throws Exception {
+     public ResponseEntity<String> uplaodId(@PathVariable("userEmailId") String userEmailId,@RequestParam("id_Photo") MultipartFile idPhoto,@PathVariable("id") Integer id) throws Exception {
 
-		 int dataId;
+
 		
 			try
 			{
 				
-				dataId = teacherService.upload(userEmailId, idPhoto);
+//				User user
+				Integer dataID= teacherService.uploadIdPhoto(userEmailId, idPhoto,id);
 			
 				String message=environment.getProperty("teacherAPI.TEACHER_DATA_ADDED_SUCCESS");
-				String toReturn = message+dataId;
+				String s=message+dataID;
 				
-				toReturn = toReturn.trim();
-				return new ResponseEntity<String>(toReturn, HttpStatus.OK);
+				
+				return new ResponseEntity<String>(s, HttpStatus.OK);
+			}
+			catch (Exception e) {
+				
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, environment.getProperty(e.getMessage()));
+			  }	 
+		 //System.out.println("Original Image Byte Size - " + idPhoto.getBytes().length);
+        // return ResponseEntity.status(HttpStatus.OK);
+ 
+     }
+	 
+	 
+ @PostMapping("/uploadDegree/{userEmailId:.+}/{id:.+}")
+	 
+     public ResponseEntity<String> uplaodDegree(@PathVariable("userEmailId") String userEmailId,@RequestParam("degree_Photo") MultipartFile idPhoto,@PathVariable("id") Integer id) throws Exception {
+
+		
+			try
+			{
+				
+			//	User user 
+				Integer dataID= teacherService.uploadDegree(userEmailId, idPhoto,id);
+			
+				String message=environment.getProperty("teacherAPI.TEACHER_DATA_ADDED_SUCCESS");
+			String s=message+dataID;
+				
+				
+				return new ResponseEntity<String>(s, HttpStatus.OK);
 			}
 			catch (Exception e) {
 				

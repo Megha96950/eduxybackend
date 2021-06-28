@@ -33,10 +33,10 @@ public class TeacherEntity {
 	@Column(name="id_proof")
 	private String idProof;
 	
-	@Column(name="degree_photo")
+	@Column(name="degree_photo",length = 1000)
 	private byte[] DegreePhoto;
 	
-	@Column(name="id_photo")
+	@Column(name="id_photo",length = 1000)
 	private byte[] idPhoto;
 	
 	@Column(name="fees_per_student")

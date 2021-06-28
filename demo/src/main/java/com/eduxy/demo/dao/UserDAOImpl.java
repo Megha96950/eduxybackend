@@ -91,21 +91,21 @@ public class UserDAOImpl implements UserDAO {
 			}
 			user.setStudent(userStudent);
 			
-//			for (TeacherEntity i : userEntity.getTeacherEntity()) {
-//				Teacher teacher =new Teacher();
-//				teacher.setTeacherId(i.getTeacherId());
-//				teacher.setSubjects(i.getSubjects());
-//				teacher.setIdProof(i.getIdProof());
-//				teacher.setIdPhoto(i.getIdPhoto()
-//						);
-//				teacher.setHigherQualification(i.getHigherQualification());
-//				teacher.setFeesCharged(i.getFeesCharged());
-//				teacher.setDescription(i.getDescription());
-//				teacher.setDegreePhoto(i.getDegreePhoto());
-//				
-//				userTeacher.add(teacher);
-//			}
-//			user.setTeacher(userTeacher);
+			for (TeacherEntity i : userEntity.getTeacherEntity()) {
+				Teacher teacher =new Teacher();
+				teacher.setTeacherId(i.getTeacherId());
+				teacher.setSubjects(i.getSubjects());
+				teacher.setIdProof(i.getIdProof());
+				teacher.setIdPhoto(i.getIdPhoto()
+						);
+				teacher.setHigherQualification(i.getHigherQualification());
+				teacher.setFeesCharged(i.getFeesCharged());
+				teacher.setDescription(i.getDescription());
+				teacher.setDegreePhoto(i.getDegreePhoto());
+				
+				userTeacher.add(teacher);
+			}
+			user.setTeacher(userTeacher);
 		}
 			
 		
@@ -241,7 +241,7 @@ public class UserDAOImpl implements UserDAO {
 		TeacherEntity newTeacher = new TeacherEntity();
 		newTeacher.setSubjects(teacher.getSubjects());
 		newTeacher.setIdProof(teacher.getIdProof());
-		newTeacher.setIdPhoto(teacher.getIdPhoto().getBytes());
+		//newTeacher.setIdPhoto(teacher.getIdPhoto().getBytes());
 		newTeacher.setHigherQualification(teacher.getHigherQualification());
 		newTeacher.setFeesCharged(teacher.getFeesCharged());
 		newTeacher.setDescription(teacher.getDescription());

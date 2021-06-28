@@ -19,28 +19,31 @@ public class TeacherDAOImpl implements TeacherDAO {
 	private EntityManager entityManager;
 	
 	@Override
-	public Integer upload(String userEmailId, byte[] idPhoto) {
+	public Integer uploadIdPhoto(String userEmailId, byte[] idPhoto,Integer id) {
 		
 		UserEntity userEntity = null;
 		TeacherEntity teacherEntity = null;
 		Integer dataId = null;
 		userEntity = entityManager.find(UserEntity.class, userEmailId);
-		teacherEntity  = entityManager.find(TeacherEntity.class, 2);
-		 System.out.println("gjkhfkja");
-		//List<TeacherEntity> teacherDataEntities = teacherEntity.getData();
-	
-		//TeacherEntity teacherDataEntity =new TeacherDataEntity();
-		//teacherDataEntity.setDegreePhoto(degreePhoto);
+		teacherEntity  = entityManager.find(TeacherEntity.class, id);
+		 //System.out.println("gjkhfkja");
 		teacherEntity.setIdPhoto(idPhoto);
+		entityManager.persist(teacherEntity);			
+		return id;
 		
-		entityManager.persist(teacherEntity);
-		
-//         List<TeacherDataEntity> teacherDataEntitiesAfterAddition = teacherEntity.getData();
-//		
-//		TeacherDataEntity teacherDataEntityAfter = teacherDataEntitiesAfterAddition.get(teacherDataEntitiesAfterAddition.size()-1);
-//		dataId = teacherDataEntityAfter.getId();
-	
-		return 2;
+	}
+
+	@Override
+	public Integer uploadDegree(String userEmailId, byte[] degreePhoto, Integer id) {
+		UserEntity userEntity = null;
+		TeacherEntity teacherEntity = null;
+		Integer dataId = null;
+		userEntity = entityManager.find(UserEntity.class, userEmailId);
+		teacherEntity  = entityManager.find(TeacherEntity.class, id);
+		 //System.out.println("gjkhfkja");
+		teacherEntity.setIdPhoto(degreePhoto);
+		entityManager.persist(teacherEntity);			
+		return id;
 		
 	}
 
