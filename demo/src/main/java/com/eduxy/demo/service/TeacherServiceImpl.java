@@ -44,16 +44,14 @@ public class TeacherServiceImpl implements TeacherService{
 	public Integer uploadDegree(String userEmailId, MultipartFile degreePhoto, Integer id) throws Exception {
         User user=null;
         Integer dataID = teacherDAO.uploadDegree(userEmailId , compressBytes(degreePhoto.getBytes()), id) ;
-//       if(dataID!=null){
-//			
-//			user = userDAO.getUserByEmailId(userEmailId);
-//	       }
-//	    else
-//		throw new Exception ("UserService.INVALID_CREDENTIALS");
-//	
-//	    return user;
        
 	 return dataID;
+	}
+	
+	@Override
+	public void changeName(String newName, String emailId) {
+		teacherDAO.changeName(newName, emailId);
+
 	}
 
 	  public static byte[] compressBytes(byte[] data) {
@@ -75,5 +73,7 @@ public class TeacherServiceImpl implements TeacherService{
 		          return outputStream.toByteArray();
 		  
 		      }
+
+	
 
 }

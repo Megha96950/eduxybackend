@@ -20,13 +20,11 @@ public class TeacherDAOImpl implements TeacherDAO {
 	
 	@Override
 	public Integer uploadIdPhoto(String userEmailId, byte[] idPhoto,Integer id) {
+	
 		
-		UserEntity userEntity = null;
 		TeacherEntity teacherEntity = null;
 		Integer dataId = null;
-		userEntity = entityManager.find(UserEntity.class, userEmailId);
 		teacherEntity  = entityManager.find(TeacherEntity.class, id);
-		 //System.out.println("gjkhfkja");
 		teacherEntity.setIdPhoto(idPhoto);
 		entityManager.persist(teacherEntity);			
 		return id;
@@ -35,15 +33,22 @@ public class TeacherDAOImpl implements TeacherDAO {
 
 	@Override
 	public Integer uploadDegree(String userEmailId, byte[] degreePhoto, Integer id) {
-		UserEntity userEntity = null;
+	
 		TeacherEntity teacherEntity = null;
 		Integer dataId = null;
-		userEntity = entityManager.find(UserEntity.class, userEmailId);
 		teacherEntity  = entityManager.find(TeacherEntity.class, id);
-		 //System.out.println("gjkhfkja");
 		teacherEntity.setIdPhoto(degreePhoto);
 		entityManager.persist(teacherEntity);			
 		return id;
+		
+	}
+
+	@Override
+	public void changeName(String newName, String emailId) {
+		
+		UserEntity userEntity = (UserEntity)entityManager.find(UserEntity.class, emailId);
+		userEntity.setName(newName);
+		entityManager.persist(userEntity);
 		
 	}
 

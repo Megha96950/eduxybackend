@@ -127,14 +127,7 @@ public class UserServiceImpl implements UserService {
 		//UserValidator.validateAddress(address);
 		User user = null;
 		Integer newTeacherID = userDAO.addTeacherDetail(userEmailId, teacher);
-//		if(newTeacherID!=null){
-//			
-//			user = userDAO.getUserByEmailId(userEmailId);
-//	}
-//	else
-//		throw new Exception ("UserService.INVALID_CREDENTIALS");
-//	
-//	return user;
+
 		
 		return newTeacherID;
 		

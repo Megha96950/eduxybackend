@@ -68,7 +68,7 @@ public class TeacherAPI {
 			try
 			{
 				
-			//	User user 
+	
 				Integer dataID= teacherService.uploadDegree(userEmailId, idPhoto,id);
 			
 				String message=environment.getProperty("teacherAPI.TEACHER_DATA_ADDED_SUCCESS");
@@ -81,9 +81,31 @@ public class TeacherAPI {
 				
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, environment.getProperty(e.getMessage()));
 			  }	 
-		 //System.out.println("Original Image Byte Size - " + idPhoto.getBytes().length);
-        // return ResponseEntity.status(HttpStatus.OK);
+		
  
      }
+ 
+ @PostMapping("/updateName/{userEmailId:.+}")
+ 
+ public ResponseEntity<String> uplaodDegree(@PathVariable("userEmailId")String userEmailId ,String newName) throws Exception {
+
+	
+		try
+		{
+			
+
+			teacherService.changeName(newName,userEmailId);
+		    String message=environment.getProperty("teacherAPI.TEACHER_NAME_CHANGE");
+		    return new ResponseEntity<String>(message, HttpStatus.OK);
+		}
+		catch (Exception e) {
+			
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, environment.getProperty(e.getMessage()));
+		  }	 
+	
+
+ }
+ 
+
+ 
 }
-//ggg
