@@ -28,14 +28,7 @@ public class TeacherServiceImpl implements TeacherService{
 	public Integer uploadIdPhoto(String userEmailId, MultipartFile idPhoto, Integer id) throws Exception {
 		User user=null;
         Integer dataID = teacherDAO.uploadIdPhoto(userEmailId , compressBytes(idPhoto.getBytes()), id) ;
-//       if(dataID!=null){
-//			
-//			user = userDAO.getUserByEmailId(userEmailId);
-//	}
-//	else
-//		throw new Exception ("UserService.INVALID_CREDENTIALS");
-//	
-//	    return user;
+
       return dataID;  
 	
 	}
@@ -53,6 +46,20 @@ public class TeacherServiceImpl implements TeacherService{
 		teacherDAO.changeName(newName, emailId);
 
 	}
+	
+	
+	@Override
+	public void changeNumber(String newNumber, String emailId) {
+		teacherDAO.changeNumber(newNumber, emailId);
+		
+	}
+
+	@Override
+	public void changePassword(String newPassword, String emailId) {
+		teacherDAO.changePassword(newPassword, emailId);
+		
+	}
+
 
 	  public static byte[] compressBytes(byte[] data) {
 		Deflater deflater = new Deflater(); 
@@ -74,6 +81,7 @@ public class TeacherServiceImpl implements TeacherService{
 		  
 		      }
 
+	
 	
 
 }

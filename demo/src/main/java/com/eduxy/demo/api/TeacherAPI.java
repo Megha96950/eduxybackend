@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -87,14 +88,14 @@ public class TeacherAPI {
  
  @PostMapping("/updateName/{userEmailId:.+}")
  
- public ResponseEntity<String> uplaodDegree(@PathVariable("userEmailId")String userEmailId ,String newName) throws Exception {
-
+ public ResponseEntity<String> updateName(@PathVariable("userEmailId")String userEmailId ,@RequestBody String newName) throws Exception {
+  System.out.println("fjhag");
 	
 		try
 		{
 			
-
-			teacherService.changeName(newName,userEmailId);
+           System.out.println(newName);
+			teacherService.changeNumber(newName,userEmailId);
 		    String message=environment.getProperty("teacherAPI.TEACHER_NAME_CHANGE");
 		    return new ResponseEntity<String>(message, HttpStatus.OK);
 		}
@@ -106,6 +107,45 @@ public class TeacherAPI {
 
  }
  
+ @PostMapping("/updateNumber/{userEmailId:.+}")
+ 
+ public ResponseEntity<String> updateNumber(@PathVariable("userEmailId")String userEmailId ,@RequestBody String newNumber) throws Exception {
+ 
+	
+		try
+		{
+		
+			teacherService.changeName(newNumber,userEmailId);
+		    String message=environment.getProperty("teacherAPI.TEACHER_Number_CHANGE");
+		    return new ResponseEntity<String>(message, HttpStatus.OK);
+		}
+		catch (Exception e) {
+			
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, environment.getProperty(e.getMessage()));
+		  }	 
+	
 
+ }
+ 
+ @PostMapping("/updatePassword/{userEmailId:.+}")
+ 
+ public ResponseEntity<String> updatePassword(@PathVariable("userEmailId")String userEmailId ,@RequestBody String newPassword) throws Exception {
+ 
+	
+		try
+		{
+		
+			teacherService.changePassword(newPassword,userEmailId);
+		    String message=environment.getProperty("teacherAPI.TEACHER_PASSWORD_CHANGE");
+		    return new ResponseEntity<String>(message, HttpStatus.OK);
+		}
+		catch (Exception e) {
+			
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, environment.getProperty(e.getMessage()));
+		  }	 
+	
+
+ }
+ 
  
 }
