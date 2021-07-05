@@ -145,13 +145,6 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	@Override
-	public void changePassword(String userEmailId, String newHashedPassword) {
-		
-        UserEntity userEntity = entityManager.find(UserEntity.class, userEmailId);
-		userEntity.setPassword(newHashedPassword);
-	}
-
-	@Override
 	public Boolean checkAvailabilityOfEmailId(String emailId) {
 		Boolean flag = false;
 		
@@ -258,6 +251,31 @@ public class UserDAOImpl implements UserDAO {
 		TeacherEntity teacherEntity = userTeacherEntitiesAfterAddition.get(userTeacherEntitiesAfterAddition.size()-1);
 		newTeacherId = teacherEntity.getTeacherId();
 		return newTeacherId;
+	}
+	
+	@Override
+	public void changeName(String newName, String emailId) {
+		
+		UserEntity userEntity = (UserEntity)entityManager.find(UserEntity.class, emailId);
+		userEntity.setName(newName);
+		entityManager.persist(userEntity);
+		
+	}
+
+	@Override
+	public void changeNumber(String newNumber, String emailId) {
+		UserEntity userEntity = (UserEntity)entityManager.find(UserEntity.class, emailId);
+		userEntity.setPhoneNumber(newNumber);;
+		entityManager.persist(userEntity);
+		
+	}
+
+	@Override
+	public void changePassword(String newPassword, String emailId) {
+		UserEntity userEntity = (UserEntity)entityManager.find(UserEntity.class, emailId);
+		userEntity.setPassword(newPassword);;
+		entityManager.persist(userEntity);
+		
 	}
 
 }

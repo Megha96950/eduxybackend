@@ -134,5 +134,25 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
+	
+	@Override
+	public void changeName(String newName, String emailId) {
+		userDAO.changeName(newName, emailId);
+
+	}
+	
+	
+	@Override
+	public void changeNumber(String newNumber, String emailId) {
+		userDAO.changeNumber(newNumber, emailId);
+		
+	}
+
+	@Override
+	public void changePassword(String newPassword, String emailId) {
+		userDAO.changePassword(newPassword, emailId);
+		
+	}
+	
 
 }

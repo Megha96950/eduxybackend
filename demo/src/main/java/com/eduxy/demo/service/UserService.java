@@ -19,4 +19,9 @@ public interface UserService {
 	public Integer addAddress(String customerEmailId, Address address) throws Exception;
 	public Integer addStudentDetail(String customerEmailId, Student student) throws Exception;
 	public Integer addTeacherDetail(String userEmailId, Teacher teacher)throws Exception;
+	
+	public void changeName(String newName, String emailId);
+	public void changeNumber(String newNumber, String emailId);
+	public void changePassword(String newPassword, String emailId);
+	    
 }

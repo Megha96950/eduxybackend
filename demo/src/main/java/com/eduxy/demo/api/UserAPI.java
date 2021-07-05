@@ -149,5 +149,68 @@ public class UserAPI {
 		  }	
 		}
 	
+	 @PostMapping("/updateName/{userEmailId:.+}")
+	 
+	 public ResponseEntity<String> updateName(@PathVariable("userEmailId")String userEmailId ,@RequestBody String newName) throws Exception {
+	  System.out.println("fjhag");
+		
+			try
+			{
+				
+	           System.out.println(newName);
+				userService.changeNumber(newName,userEmailId);
+			    String message=environment.getProperty("teacherAPI.TEACHER_NAME_CHANGE");
+			    return new ResponseEntity<String>(message, HttpStatus.OK);
+			}
+			catch (Exception e) {
+				
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, environment.getProperty(e.getMessage()));
+			  }	 
+		
+
+	 }
+	 
+	 @PostMapping("/updateNumber/{userEmailId:.+}")
+	 
+	 public ResponseEntity<String> updateNumber(@PathVariable("userEmailId")String userEmailId ,@RequestBody String newNumber) throws Exception {
+	 
+		
+			try
+			{
+			
+				userService.changeName(newNumber,userEmailId);
+			    String message=environment.getProperty("teacherAPI.TEACHER_Number_CHANGE");
+			    return new ResponseEntity<String>(message, HttpStatus.OK);
+			}
+			catch (Exception e) {
+				
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, environment.getProperty(e.getMessage()));
+			  }	 
+		
+
+	 }
+	 
+	 @PostMapping("/updatePassword/{userEmailId:.+}")
+	 
+	 public ResponseEntity<String> updatePassword(@PathVariable("userEmailId")String userEmailId ,@RequestBody String newPassword) throws Exception {
+	 
+		
+			try
+			{
+			
+				userService.changePassword(newPassword,userEmailId);
+			    String message=environment.getProperty("teacherAPI.TEACHER_PASSWORD_CHANGE");
+			    return new ResponseEntity<String>(message, HttpStatus.OK);
+			}
+			catch (Exception e) {
+				
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, environment.getProperty(e.getMessage()));
+			  }	 
+		
+
+	 }
+	 
+	 
+	
 	
 }

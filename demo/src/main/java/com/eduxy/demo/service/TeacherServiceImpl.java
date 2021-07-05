@@ -21,8 +21,7 @@ public class TeacherServiceImpl implements TeacherService{
 	@Autowired
 	TeacherDAO teacherDAO;
 	
-	@Autowired
-	private UserDAO userDAO;
+
 	
 	@Override
 	public Integer uploadIdPhoto(String userEmailId, MultipartFile idPhoto, Integer id) throws Exception {
@@ -40,23 +39,11 @@ public class TeacherServiceImpl implements TeacherService{
        
 	 return dataID;
 	}
-	
-	@Override
-	public void changeName(String newName, String emailId) {
-		teacherDAO.changeName(newName, emailId);
-
-	}
-	
-	
-	@Override
-	public void changeNumber(String newNumber, String emailId) {
-		teacherDAO.changeNumber(newNumber, emailId);
-		
-	}
+   
 
 	@Override
-	public void changePassword(String newPassword, String emailId) {
-		teacherDAO.changePassword(newPassword, emailId);
+	public void updateDescription(Integer id, String newDescription) {
+		  teacherDAO.updateDescription(id,newDescription);
 		
 	}
 
@@ -80,6 +67,7 @@ public class TeacherServiceImpl implements TeacherService{
 		          return outputStream.toByteArray();
 		  
 		      }
+
 
 	
 	

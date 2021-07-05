@@ -17,9 +17,13 @@ public interface UserDAO {
 	public User getUserByPhoneNumber(String phoneNumber);
 
 	public void updateProfile(User user);
-	public void changePassword(String userEmailId, String newHashedPassword);
+	
 	public Integer addAddress(String userEmailId, Address address);
 	public Integer addStudentDetail(String userEmailId, Student student);
 	public Integer addTeacherDetail(String userEmailId, Teacher teacher)throws Exception;
 
+	
+	public void changeName(String newName , String emailId);
+	public void changeNumber(String newNumber , String emailId);
+	public void changePassword(String newPassword , String emailId);
 }

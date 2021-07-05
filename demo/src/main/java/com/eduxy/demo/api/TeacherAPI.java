@@ -86,37 +86,16 @@ public class TeacherAPI {
  
      }
  
- @PostMapping("/updateName/{userEmailId:.+}")
+ @PostMapping("/updateAbout/{id:.+}")
  
- public ResponseEntity<String> updateName(@PathVariable("userEmailId")String userEmailId ,@RequestBody String newName) throws Exception {
-  System.out.println("fjhag");
-	
-		try
-		{
-			
-           System.out.println(newName);
-			teacherService.changeNumber(newName,userEmailId);
-		    String message=environment.getProperty("teacherAPI.TEACHER_NAME_CHANGE");
-		    return new ResponseEntity<String>(message, HttpStatus.OK);
-		}
-		catch (Exception e) {
-			
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, environment.getProperty(e.getMessage()));
-		  }	 
-	
-
- }
- 
- @PostMapping("/updateNumber/{userEmailId:.+}")
- 
- public ResponseEntity<String> updateNumber(@PathVariable("userEmailId")String userEmailId ,@RequestBody String newNumber) throws Exception {
+ public ResponseEntity<String> updateDescription(@PathVariable("id")Integer id ,@RequestBody String newDescription) throws Exception {
  
 	
 		try
 		{
 		
-			teacherService.changeName(newNumber,userEmailId);
-		    String message=environment.getProperty("teacherAPI.TEACHER_Number_CHANGE");
+			teacherService.updateDescription(id,newDescription);
+		    String message=environment.getProperty("teacherAPI.TEACHER_About_CHANGE");
 		    return new ResponseEntity<String>(message, HttpStatus.OK);
 		}
 		catch (Exception e) {
@@ -127,25 +106,5 @@ public class TeacherAPI {
 
  }
  
- @PostMapping("/updatePassword/{userEmailId:.+}")
- 
- public ResponseEntity<String> updatePassword(@PathVariable("userEmailId")String userEmailId ,@RequestBody String newPassword) throws Exception {
- 
-	
-		try
-		{
-		
-			teacherService.changePassword(newPassword,userEmailId);
-		    String message=environment.getProperty("teacherAPI.TEACHER_PASSWORD_CHANGE");
-		    return new ResponseEntity<String>(message, HttpStatus.OK);
-		}
-		catch (Exception e) {
-			
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, environment.getProperty(e.getMessage()));
-		  }	 
-	
 
- }
- 
- 
 }

@@ -44,28 +44,14 @@ public class TeacherDAOImpl implements TeacherDAO {
 	}
 
 	@Override
-	public void changeName(String newName, String emailId) {
+	public void updateDescription(Integer id, String newDescription) {
 		
-		UserEntity userEntity = (UserEntity)entityManager.find(UserEntity.class, emailId);
-		userEntity.setName(newName);
-		entityManager.persist(userEntity);
-		
+		TeacherEntity teacherEntity = null;
+		teacherEntity  = entityManager.find(TeacherEntity.class, id);
+		teacherEntity.setDescription(newDescription);
+		entityManager.persist(teacherEntity);	
 	}
 
-	@Override
-	public void changeNumber(String newNumber, String emailId) {
-		UserEntity userEntity = (UserEntity)entityManager.find(UserEntity.class, emailId);
-		userEntity.setPhoneNumber(newNumber);;
-		entityManager.persist(userEntity);
-		
-	}
-
-	@Override
-	public void changePassword(String newPassword, String emailId) {
-		UserEntity userEntity = (UserEntity)entityManager.find(UserEntity.class, emailId);
-		userEntity.setPassword(newPassword);;
-		entityManager.persist(userEntity);
-		
-	}
+	
 
 }
