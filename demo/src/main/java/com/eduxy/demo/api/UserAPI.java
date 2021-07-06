@@ -1,5 +1,7 @@
 package com.eduxy.demo.api;
 
+import java.awt.SystemColor;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,6 +120,7 @@ public class UserAPI {
 		
 		try
 		{
+			System.out.println(student.getStandard());
 			studentId = userService.addStudentDetail(userEmailId,student);
 			String message=environment.getProperty("userAPI.STUDENT_ADDED_SUCCESS");
 			String toReturn = message+studentId;

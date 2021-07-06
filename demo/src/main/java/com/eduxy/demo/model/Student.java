@@ -6,10 +6,10 @@ public class Student {
 	
     private int StudentId;
 	private String subjects;
-	private String institueName;
+	private String instituteName;
 	private String idProof;
 	private byte[] idPhoto;
-	
+	private String standard;
 	
 	public int getStudentId() {
 		return StudentId;
@@ -23,11 +23,12 @@ public class Student {
 	public void setSubjects(String subjects) {
 		this.subjects = subjects;
 	}
-	public String getInstitueName() {
-		return institueName;
+	
+	public String getInstituteName() {
+		return instituteName;
 	}
-	public void setInstitueName(String institueName) {
-		this.institueName = institueName;
+	public void setInstituteName(String instituteName) {
+		this.instituteName = instituteName;
 	}
 	public String getIdProof() {
 		return idProof;
@@ -40,6 +41,12 @@ public class Student {
 	}
 	public void setIdPhoto(byte[] idPhoto) {
 		this.idPhoto = idPhoto;
+	}
+	public String getStandard() {
+		return standard;
+	}
+	public void setStandard(String standard) {
+		this.standard = standard;
 	}
 	
 	

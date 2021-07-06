@@ -83,7 +83,7 @@ public class UserDAOImpl implements UserDAO {
 				student.setStudentId(i.getStudentId());
 				student.setSubjects(i.getSubjects());
 				student.setIdProof(i.getIdProof());
-				student.setInstitueName(i.getInstituteName());
+				student.setInstituteName(i.getInstituteName());
 				student.setIdPhoto(i.getIdPhoto());
 				
 				userStudent.add(student);
@@ -204,7 +204,8 @@ public class UserDAOImpl implements UserDAO {
 		//newStudent.setPhoto(student.getPhoto());
 		newStudent.setIdProof(student.getIdProof());
 		//System.out.println(student.getPhoto());
-		newStudent.setInstitueName(student.getInstitueName());
+		newStudent.setInstituteName(student.getInstituteName());
+		newStudent.setStandard(student.getStandard());
 		
 		userStudentEntities.add(newStudent);
 		userEntity.setStudentEntity(userStudentEntities);

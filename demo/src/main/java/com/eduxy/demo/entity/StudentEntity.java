@@ -28,6 +28,9 @@ public class StudentEntity {
 	@Column(name="photo")
 	private byte[] idPhoto;
 
+	@Column(name="standard")
+	private String standard;
+	
 	public int getStudentId() {
 		return studentId;
 	}
@@ -44,11 +47,13 @@ public class StudentEntity {
 		this.subjects = subjects;
 	}
 
+    
+
 	public String getInstituteName() {
 		return instituteName;
 	}
 
-	public void setInstitueName(String instituteName) {
+	public void setInstituteName(String instituteName) {
 		this.instituteName = instituteName;
 	}
 
@@ -60,11 +65,6 @@ public class StudentEntity {
 		this.idProof = idProof;
 	}
 
-	
-
-	public void setInstituteName(String instituteName) {
-		this.instituteName = instituteName;
-	}
 
 	public byte[] getIdPhoto() {
 		return idPhoto;
@@ -72,6 +72,14 @@ public class StudentEntity {
 
 	public void setIdPhoto(byte[] idPhoto) {
 		this.idPhoto = idPhoto;
+	}
+
+	public String getStandard() {
+		return standard;
+	}
+
+	public void setStandard(String standard) {
+		this.standard = standard;
 	}
 
 
