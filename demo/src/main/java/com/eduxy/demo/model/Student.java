@@ -8,7 +8,7 @@ public class Student {
 	private String subjects;
 	private String institueName;
 	private String idProof;
-	private String photo;
+	private byte[] idPhoto;
 	
 	
 	public int getStudentId() {
@@ -35,12 +35,13 @@ public class Student {
 	public void setIdProof(String idProof) {
 		this.idProof = idProof;
 	}
-	public String getPhoto() {
-		return photo;
+	public byte[] getIdPhoto() {
+		return idPhoto;
 	}
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setIdPhoto(byte[] idPhoto) {
+		this.idPhoto = idPhoto;
 	}
+	
 	
 	
 

@@ -26,7 +26,7 @@ public class StudentEntity {
 	private String idProof;
 	
 	@Column(name="photo")
-	private String photo;
+	private byte[] idPhoto;
 
 	public int getStudentId() {
 		return studentId;
@@ -60,13 +60,21 @@ public class StudentEntity {
 		this.idProof = idProof;
 	}
 
-	public String getPhoto() {
-		return photo;
+	
+
+	public void setInstituteName(String instituteName) {
+		this.instituteName = instituteName;
 	}
 
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public byte[] getIdPhoto() {
+		return idPhoto;
 	}
+
+	public void setIdPhoto(byte[] idPhoto) {
+		this.idPhoto = idPhoto;
+	}
+
+
 	
 	
 	

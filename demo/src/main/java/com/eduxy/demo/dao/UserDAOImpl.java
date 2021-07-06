@@ -1,6 +1,5 @@
 package com.eduxy.demo.dao;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +8,7 @@ import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import com.eduxy.demo.entity.AddressEntity;
 import com.eduxy.demo.entity.StudentEntity;
@@ -85,7 +84,7 @@ public class UserDAOImpl implements UserDAO {
 				student.setSubjects(i.getSubjects());
 				student.setIdProof(i.getIdProof());
 				student.setInstitueName(i.getInstituteName());
-				student.setPhoto(i.getPhoto());
+				student.setIdPhoto(i.getIdPhoto());
 				
 				userStudent.add(student);
 			}
@@ -96,8 +95,7 @@ public class UserDAOImpl implements UserDAO {
 				teacher.setTeacherId(i.getTeacherId());
 				teacher.setSubjects(i.getSubjects());
 				teacher.setIdProof(i.getIdProof());
-				teacher.setIdPhoto(i.getIdPhoto()
-						);
+				teacher.setIdPhoto(i.getIdPhoto());
 				teacher.setHigherQualification(i.getHigherQualification());
 				teacher.setFeesCharged(i.getFeesCharged());
 				teacher.setDescription(i.getDescription());
@@ -203,9 +201,9 @@ public class UserDAOImpl implements UserDAO {
 		
 		StudentEntity newStudent = new StudentEntity();
 		newStudent.setSubjects(student.getSubjects());
-		newStudent.setPhoto(student.getPhoto());
+		//newStudent.setPhoto(student.getPhoto());
 		newStudent.setIdProof(student.getIdProof());
-		System.out.println(student.getPhoto());
+		//System.out.println(student.getPhoto());
 		newStudent.setInstitueName(student.getInstitueName());
 		
 		userStudentEntities.add(newStudent);
