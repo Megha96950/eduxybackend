@@ -10,6 +10,8 @@ public class Student {
 	private String idProof;
 	private byte[] idPhoto;
 	private String standard;
+	private String motherName;
+	private String fatherName;
 	
 	public int getStudentId() {
 		return StudentId;
@@ -47,6 +49,18 @@ public class Student {
 	}
 	public void setStandard(String standard) {
 		this.standard = standard;
+	}
+	public String getMotherName() {
+		return motherName;
+	}
+	public void setMotherName(String motherName) {
+		this.motherName = motherName;
+	}
+	public String getFatherName() {
+		return fatherName;
+	}
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
 	}
 	
 	

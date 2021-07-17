@@ -37,7 +37,7 @@ public class TeacherDAOImpl implements TeacherDAO {
 		TeacherEntity teacherEntity = null;
 		Integer dataId = null;
 		teacherEntity  = entityManager.find(TeacherEntity.class, id);
-		teacherEntity.setIdPhoto(degreePhoto);
+		teacherEntity.setDegreePhoto(degreePhoto);
 		entityManager.persist(teacherEntity);			
 		return id;
 		

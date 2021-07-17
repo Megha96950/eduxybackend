@@ -2,6 +2,7 @@ package com.eduxy.demo.service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.zip.Deflater;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eduxy.demo.dao.StudentDAO;
+
+import com.eduxy.demo.model.Teacher;
 import com.eduxy.demo.model.User;
 
 @Service( value = "studentService" )
@@ -19,6 +22,8 @@ public class StudentServiceImpl implements StudentService{
 	@Autowired
 	public StudentDAO studentDAO;
 	
+
+	
 	@Override
 	public Integer uploadIdPhoto(String userEmailId, MultipartFile idPhoto, Integer id) throws Exception {
 		User user=null;
@@ -26,6 +31,12 @@ public class StudentServiceImpl implements StudentService{
 
       return dataID;  
 	
+	}
+	@Override
+	public List<Teacher> searchTeacher(String Keyword) {
+		List<Teacher> teachers=studentDAO.searchTeacher(Keyword);
+		
+		return teachers; 
 	}
 	
 	public static byte[] compressBytes(byte[] data) {
@@ -47,6 +58,8 @@ public class StudentServiceImpl implements StudentService{
 		          return outputStream.toByteArray();
 		  
 		      }
+
+	
 
 
 }

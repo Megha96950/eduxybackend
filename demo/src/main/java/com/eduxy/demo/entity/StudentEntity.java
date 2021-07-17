@@ -1,11 +1,15 @@
 package com.eduxy.demo.entity;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.search.annotations.*;
+
 
 @Entity
 @Table(name="student")
@@ -17,7 +21,7 @@ public class StudentEntity {
 	private int studentId;
 	
 	@Column(name="subject_to_study")
-	private String subjects;
+    private String subjects; 
 	
 	@Column(name="institute_name")
 	private String instituteName;
@@ -25,11 +29,17 @@ public class StudentEntity {
 	@Column(name="id_proof")
 	private String idProof;
 	
-	@Column(name="photo")
+	@Column(name="photo",length=1000)
 	private byte[] idPhoto;
 
 	@Column(name="standard")
 	private String standard;
+	
+	@Column(name="mother_name")
+	private String motherName;
+
+	@Column(name="father_name")
+	private String fatherName;
 	
 	public int getStudentId() {
 		return studentId;
@@ -82,8 +92,23 @@ public class StudentEntity {
 		this.standard = standard;
 	}
 
+	public String getMotherName() {
+		return motherName;
+	}
 
-	
+	public void setMotherName(String motherName) {
+		this.motherName = motherName;
+	}
+
+	public String getFatherName() {
+		return fatherName;
+	}
+
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
+	}
+
+
 	
 	
 }

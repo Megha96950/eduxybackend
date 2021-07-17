@@ -63,14 +63,14 @@ public class TeacherAPI {
 	 
  @PostMapping("/uploadDegree/{userEmailId:.+}/{id:.+}")
 	 
-     public ResponseEntity<String> uplaodDegree(@PathVariable("userEmailId") String userEmailId,@RequestParam("degree_Photo") MultipartFile idPhoto,@PathVariable("id") Integer id) throws Exception {
+     public ResponseEntity<String> uplaodDegree(@PathVariable("userEmailId") String userEmailId,@RequestParam("degree_Photo") MultipartFile degreePhoto,@PathVariable("id") Integer id) throws Exception {
 
 		
 			try
 			{
 				
 	
-				Integer dataID= teacherService.uploadDegree(userEmailId, idPhoto,id);
+				Integer dataID= teacherService.uploadDegree(userEmailId, degreePhoto,id);
 			
 				String message=environment.getProperty("teacherAPI.TEACHER_DATA_ADDED_SUCCESS");
 			String s=message+dataID;

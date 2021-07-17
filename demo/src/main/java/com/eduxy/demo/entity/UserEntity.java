@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.search.annotations.Field;
+
 
 
 @Entity
@@ -18,6 +20,7 @@ public class UserEntity {
 	@Id
 	@Column(name="email_id")
 	private String emailId;
+	
 	
 	@Column(name="name")
 	private String name;

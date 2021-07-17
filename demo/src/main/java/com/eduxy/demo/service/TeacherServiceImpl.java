@@ -2,6 +2,7 @@ package com.eduxy.demo.service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.zip.Deflater;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.eduxy.demo.dao.TeacherDAO;
 import com.eduxy.demo.dao.UserDAO;
+import com.eduxy.demo.model.Teacher;
 import com.eduxy.demo.model.User;
 
 
@@ -46,6 +48,8 @@ public class TeacherServiceImpl implements TeacherService{
 		  teacherDAO.updateDescription(id,newDescription);
 		
 	}
+	
+	
 
 
 	  public static byte[] compressBytes(byte[] data) {
@@ -67,6 +71,8 @@ public class TeacherServiceImpl implements TeacherService{
 		          return outputStream.toByteArray();
 		  
 		      }
+
+	
 
 
 	

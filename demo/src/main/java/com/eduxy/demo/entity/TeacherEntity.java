@@ -12,6 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
+
 @Entity
 @Table(name="teacher")
 public class TeacherEntity {
@@ -22,7 +26,7 @@ public class TeacherEntity {
 	private int teacherId;
 	
 	@Column(name="subject_to_teach")
-	private String subjects;
+    private String subjects;
 	
 	@Column(name="description")
 	private String description;
@@ -44,6 +48,8 @@ public class TeacherEntity {
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="teacher_id")
+	
+	
 	private List<TeacherDataEntity> data;
 
 	public List<TeacherDataEntity> getData() {
@@ -58,12 +64,14 @@ public class TeacherEntity {
 	public void setTeacherId(int teacherId) {
 		this.teacherId = teacherId;
 	}
+	
 	public String getSubjects() {
 		return subjects;
 	}
 	public void setSubjects(String subjects) {
 		this.subjects = subjects;
 	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -95,6 +103,7 @@ public class TeacherEntity {
 	public void setIdPhoto(byte[] idPhoto) {
 		this.idPhoto = idPhoto;
 	}
+	@Field
 	public String getFeesCharged() {
 		return feesCharged;
 	}
