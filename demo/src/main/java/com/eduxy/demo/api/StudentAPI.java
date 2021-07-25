@@ -62,7 +62,7 @@ public class StudentAPI {
 		
  
      }
-      @GetMapping("/searchTeacher/{keyword:.+}")
+      @PostMapping("/searchTeacher/{keyword:.+}")
  	 
       public ResponseEntity<List<Teacher>> searchTeacher(@PathVariable String keyword) throws Exception {
     
