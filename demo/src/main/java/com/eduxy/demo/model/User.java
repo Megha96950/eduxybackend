@@ -14,8 +14,11 @@ public class User {
 	private List<Address> addresses;
 	private List<Student> student;
 	private List<Teacher> teacher;
-	
-	
+	private Boolean isPresent;
+	public User() {}
+	public User(String emailId) {
+	    this.emailId = emailId;
+	  }
 	
 	public List<Address> getAddresses() {
 		return addresses;

@@ -3,6 +3,7 @@ package com.eduxy.demo.service;
 
 
 import com.eduxy.demo.model.Address;
+import com.eduxy.demo.model.Notification;
 import com.eduxy.demo.model.Student;
 import com.eduxy.demo.model.Teacher;
 import com.eduxy.demo.model.User;
@@ -23,5 +24,9 @@ public interface UserService {
 	public void changeName(String newName, String emailId);
 	public void changeNumber(String newNumber, String emailId);
 	public void changePassword(String newPassword, String emailId);
+	
+	public User getUser(String emailid);
+	public Boolean getUserExist(String emailid);
+	 public void notifyUser(User recipientUser, Notification notification);
 	    
 }

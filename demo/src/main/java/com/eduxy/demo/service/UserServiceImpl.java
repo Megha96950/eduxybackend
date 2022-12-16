@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.zip.Deflater;
 
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eduxy.demo.dao.UserDAO;
+import com.eduxy.demo.exception.UserNotFoundException;
 import com.eduxy.demo.model.Address;
+import com.eduxy.demo.model.Notification;
 import com.eduxy.demo.model.Student;
 import com.eduxy.demo.model.Teacher;
 import com.eduxy.demo.model.User;
 import com.eduxy.demo.validator.UserValidator;
-
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 
 
@@ -27,6 +30,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO userDAO;
 	
+	 @Autowired
+	  private SimpMessagingTemplate simpMessagingTemplate;
+	 
 	@Override
 	public User authenticateUser(String emailId, String password) throws Exception{
 
@@ -153,6 +159,40 @@ public class UserServiceImpl implements UserService {
 		userDAO.changePassword(newPassword, emailId);
 		
 	}
-	
 
+	@Override
+	public Boolean getUserExist(String emailid) {
+	    return null;
+	}
+
+	@Override
+	public User getUser(String emailid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+//	private <T> User getUser(T userIdentifier, IUserRetrievalStrategy<T> strategy)
+//		      throws UserNotFoundException {
+//		    User user = strategy.getUser(userIdentifier);
+//
+//		    if (user == null) { throw new UserNotFoundException("User not found."); }
+//
+//		    return user;
+//     }
+//
+//	public User getUser(String userEmail)
+//		      throws BeansException, UserNotFoundException {
+//		    return this.getUser(userEmail, beanFactory.getBean(UserRetrievalByEmailStrategy.class));
+//		  }
+
+	 
+	  public void notifyUser(User recipientUser, Notification notification) {
+//		    if (this.isPresent(recipientUser)) {
+		    	simpMessagingTemplate
+		        .convertAndSend("/topic/user.notification." + recipientUser.getEmailId(), notification);
+//		    } else {
+//		      System.out.println("sending email notification to " + recipientUser.getName());
+//		
+//		    }
+		  }
 }

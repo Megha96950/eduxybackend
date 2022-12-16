@@ -1,6 +1,6 @@
 package com.eduxy.demo.model;
 
-import javax.persistence.Column;
+
 
 public class Student {
 	
