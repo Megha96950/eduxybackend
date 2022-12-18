@@ -4,7 +4,6 @@ package com.eduxy.demo.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import com.eduxy.demo.model.User;
 
 import java.util.UUID;
 
@@ -15,37 +14,39 @@ public class ChatChannelEntity {
   @Id
   @NotNull
   private String uuid;
+  
 
-  @OneToOne
-  @JoinColumn(name = "userIdOne")
-  private User userOne;
 
-  @OneToOne
-  @JoinColumn(name = "userIdTwo")
-  private User userTwo;
+  @OneToOne()
+  @JoinColumn(name = "UserIdOne")
+  private UserEntity UserOne;
 
-  public ChatChannelEntity(User User, User userTwo) {
+  @OneToOne()
+  @JoinColumn(name = "UserIdTwo")
+  private UserEntity UserTwo;
+
+  public ChatChannelEntity(UserEntity UserOne, UserEntity UserTwo) {
     this.uuid = UUID.randomUUID().toString();
-    this.userOne = userOne;
-    this.userTwo = userTwo;
+    this.UserOne = UserOne;
+    this.UserTwo = UserTwo;
   }
 
   public ChatChannelEntity() {}
 
-  public void setUserTwo(User user) {
-    this.userTwo = user;
+  public void setUserTwo(UserEntity UserEntity) {
+    this.UserTwo = UserEntity;
   }
 
-  public void setUserOne(User user) {
-    this.userOne = user;
+  public void setUserOne(UserEntity UserEntity) {
+    this.UserOne = UserEntity;
   }
 
-  public User getUserOne() {
-    return this.userOne;
+  public UserEntity getUserOne() {
+    return this.UserOne;
   }
 
-  public User getUserTwo() {
-    return this.userTwo;
+  public UserEntity getUserTwo() {
+    return this.UserTwo;
   }
 
   public String getUuid() {

@@ -44,7 +44,7 @@ public interface  ChatChannelDAO
 //	      + "    ChatChannel c"
 //	      + "  WHERE"
 //	      + "    c.uuid IS :uuid")
-     public ChatChannelEntity getChannelDetails( String uuid);
+     public ChatChannel getChannelDetails( String uuid);
 	
 
 }

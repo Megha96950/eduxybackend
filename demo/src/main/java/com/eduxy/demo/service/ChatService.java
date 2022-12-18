@@ -1,5 +1,7 @@
 package com.eduxy.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.BeansException;
 
 import com.eduxy.demo.exception.IsSameUserException;
@@ -13,4 +15,5 @@ public interface ChatService {
     public String newChatSession(ChatChannel chatChannel)throws BeansException,UserNotFoundException;
     public String establishChatSession(ChatChannel chatChannel) throws IsSameUserException, BeansException,UserNotFoundException;
     public void submitMessage(ChatMessage chatMessage)throws BeansException, UserNotFoundException ;
+    public List<ChatMessage> getExistingChatMessages(String channelUuid) ;
 }

@@ -46,7 +46,10 @@ public class UserEntity {
 	@JoinColumn(name="user_email_id")
 	private List<TeacherEntity> teacherEntity;
 	
-	
+	public UserEntity() {};
+	public UserEntity(String emailId) {
+	    this.emailId = emailId;
+	  }
 	
 	public List<StudentEntity> getStudentEntity() {
 		return studentEntity;

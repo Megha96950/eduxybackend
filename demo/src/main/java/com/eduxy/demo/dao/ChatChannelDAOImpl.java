@@ -7,13 +7,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.eduxy.demo.entity.ChatChannelEntity;
-
+import com.eduxy.demo.entity.UserEntity;
 import com.eduxy.demo.model.ChatChannel;
+import com.eduxy.demo.model.User;
 import com.eduxy.demo.service.UserService;
 ;
-
+@Repository(value = "chatChannelDAO")
 public class ChatChannelDAOImpl implements ChatChannelDAO {
 
 	@Autowired
@@ -40,16 +42,39 @@ public class ChatChannelDAOImpl implements ChatChannelDAO {
 	}
 	@Override
 	public String newChatSession(ChatChannel chatchannel) {
+		User userOne= userService.getUser(ChatChannel.getUserIdOne());
+		User userTwo=userService.getUser(ChatChannel.getUserIdTwo());
+		UserEntity userEntityOne= new UserEntity();
+		UserEntity userEntityTwo= new UserEntity();
+		userEntityOne.setEmailId(userOne.getEmailId());
+		userEntityOne.setName(userOne.getName());
+		userEntityOne.setPhoneNumber(userOne.getPhoneNumber());
+		userEntityOne.setRole(userOne.getRole());
+		userEntityTwo.setEmailId(userTwo.getEmailId());
+		userEntityTwo.setName(userTwo.getName());
+		userEntityTwo.setPhoneNumber(userTwo.getPhoneNumber());
+		userEntityTwo.setRole(userTwo.getRole());
 		ChatChannelEntity chatChannelEntity =new ChatChannelEntity
-				(userService.getUser(ChatChannel.getUserIdOne()),userService.getUser(ChatChannel.getUserIdTwo()));
+				(userEntityOne,userEntityTwo);
 		entityManager.persist(chatChannelEntity);
 		return chatChannelEntity.getUuid();
 	}
 	
 	@Override
-	public ChatChannelEntity getChannelDetails(String uuid) {
-		// TODO Auto-generated method stub
-		return null;
+	public ChatChannel getChannelDetails(String uuid) {
+		Query query = entityManager.createQuery("select c from chatchannel c"
+				+ " where c.uuid = ?1");
+		 query.setParameter(1,"%"+uuid+"%" );
+		List<ChatChannelEntity> chatChannelEntity =query.getResultList();
+		ChatChannel channel =new ChatChannel();
+		for(ChatChannelEntity t: chatChannelEntity) {
+			
+			channel.setUserIdOne(t.getUserOne().getEmailId());
+			channel.setUserIdTwo(t.getUserTwo().getEmailId());
+			
+			 
+		 }
+		return channel;
 	}
 
 }

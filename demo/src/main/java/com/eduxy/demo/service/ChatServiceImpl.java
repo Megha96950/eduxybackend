@@ -3,16 +3,18 @@ package com.eduxy.demo.service;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+
 import org.springframework.stereotype.Service;
-import com.eduxy.demo.entity.ChatChannelEntity;
+import org.springframework.transaction.annotation.Transactional;
+
+
 import com.eduxy.demo.entity.ChatMessageEntity;
 import com.eduxy.demo.entity.UserEntity;
 import com.eduxy.demo.dao.ChatChannelDAO;
 import com.eduxy.demo.dao.ChatMessageDAO;
 import com.google.common.collect.Lists;
 import com.eduxy.demo.model.ChatChannel;
-import org.springframework.data.domain.PageRequest;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,14 +26,17 @@ import com.eduxy.demo.exception.IsSameUserException;
 import com.eduxy.demo.model.ChatMessage;
 import com.eduxy.demo.model.Notification;
 import com.eduxy.demo.model.User;
-@Service
+
+@Service(value="ChatService")
+@Transactional
 public class ChatServiceImpl implements ChatService {
 	@Autowired
 	private EntityManager entityManager;
+	@Autowired
   private ChatChannelDAO chatChannelDAO;
-
-  private ChatMessageDAO chatMessageRepository;
-
+	@Autowired
+  private ChatMessageDAO chatMessageDAO;
+	@Autowired
   private UserService userService;
   
   private final int MAX_PAGABLE_CHAT_MESSAGES = 100;
@@ -39,10 +44,10 @@ public class ChatServiceImpl implements ChatService {
   @Autowired
   public ChatServiceImpl(
       ChatChannelDAO chatChannelDAO,
-      ChatMessageDAO chatMessageRepository,
+      ChatMessageDAO chatMessageDAO,
       UserService userService) {
     this.chatChannelDAO = chatChannelDAO;
-    this.chatMessageRepository = chatMessageRepository;
+    this.chatMessageDAO = chatMessageDAO;
     this.userService = userService;
   }
  
@@ -91,14 +96,14 @@ public class ChatServiceImpl implements ChatService {
       )
     );
   }
- 
+ @Override
   public List<ChatMessage> getExistingChatMessages(String channelUuid) {
-    ChatChannelEntity channel = chatChannelDAO.getChannelDetails(channelUuid);
+    ChatChannel channel = chatChannelDAO.getChannelDetails(channelUuid);
 
     List<ChatMessageEntity> chatMessages = 
-      chatMessageRepository.getExistingChatMessages(
-        channel.getUserOne().getEmailId(),
-        channel.getUserTwo().getEmailId(),
+      chatMessageDAO.getExistingChatMessages(
+        channel.getUserIdOne(),
+        channel.getUserIdTwo(),
         PageRequest.of(0, MAX_PAGABLE_CHAT_MESSAGES)
       );
 
@@ -126,8 +131,8 @@ public class ChatServiceImpl implements ChatService {
 
 	  public  ChatMessageEntity mapChatDTOtoMessage(ChatMessage dto) {
 	    return new ChatMessageEntity(
-	      new User(dto.getRecipientUser()),
-	      new User(dto.getAuthorUser()),
+	      new UserEntity(dto.getRecipientUser()),
+	      new UserEntity(dto.getAuthorUser()),
 	      dto.getContents()
 	    );
 	  }

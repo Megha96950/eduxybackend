@@ -14,24 +14,31 @@ public class ChatMessageEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
+  
 
-  @OneToOne
-  @JoinColumn(name = "authorUserId")
-  private User authorUser;
-
-  @OneToOne
-  @JoinColumn(name = "recipientUserId")
-  private User recipientUser;
-
+  
   @NotNull
   private Date timeSent;
 
   @NotNull
   private String contents;
 
+ 
+  
+  @OneToOne
+  @JoinColumn(name = "authorUserId")
+  private UserEntity authorUser;
+
+  @OneToOne
+  @JoinColumn(name = "recipientUserId")
+  private UserEntity recipientUser;
+
+
+
+
   public ChatMessageEntity() {}
 
-  public ChatMessageEntity(User user, User user2, String contents) {
+  public ChatMessageEntity(UserEntity user, UserEntity user2, String contents) {
     this.authorUser = user;
     this.recipientUser = user2;
     this.contents = contents;
@@ -42,19 +49,19 @@ public class ChatMessageEntity {
     return this.id;
   }
   
-  public User getAuthorUser() {
+  public UserEntity getAuthorUser() {
     return this.authorUser;
   }
   
-  public User getRecipientUser() {
+  public UserEntity getRecipientUser() {
     return this.recipientUser;
   }
 
-  public void setAuthorUser(User user) {
+  public void setAuthorUser(UserEntity user) {
     this.recipientUser = user;
   }
   
-  public void setRecipientUser(User user) {
+  public void setRecipientUser(UserEntity user) {
     this.authorUser = user;
   }
 

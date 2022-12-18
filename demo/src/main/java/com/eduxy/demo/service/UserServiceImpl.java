@@ -1,18 +1,17 @@
 package com.eduxy.demo.service;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.zip.Deflater;
 
-import org.springframework.beans.BeansException;
+
+
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+
+
 
 import com.eduxy.demo.dao.UserDAO;
-import com.eduxy.demo.exception.UserNotFoundException;
+
 import com.eduxy.demo.model.Address;
 import com.eduxy.demo.model.Notification;
 import com.eduxy.demo.model.Student;
@@ -30,8 +29,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO userDAO;
 	
-	 @Autowired
-	  private SimpMessagingTemplate simpMessagingTemplate;
+	 private SimpMessagingTemplate simpMessagingTemplate;
+	
 	 
 	@Override
 	public User authenticateUser(String emailId, String password) throws Exception{
