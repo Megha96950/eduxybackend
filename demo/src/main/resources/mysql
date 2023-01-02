@@ -51,3 +51,24 @@ mother_name varchar(20),
 father_name varchar(20),
 constraint ek_student_id_pk primary key (student_id));
  
+ CREATE TABLE chatChannel (
+  uuid VARCHAR(256) NOT NULL,
+  userIdOne varchar(50) NOT NULL,
+  userIdTwo varchar(50) NOT NULL,
+  PRIMARY KEY (uuid),
+  FOREIGN KEY (userIdOne) REFERENCES user(email_id),
+  FOREIGN KEY (userIdTwo) REFERENCES user(email_id)
+);
+
+CREATE TABLE chatMessage (
+  id INT NOT NULL AUTO_INCREMENT,
+  authorUserId varchar(50) NOT NULL,
+  recipientUserId varchar(50) NOT NULL,
+  contents TEXT NOT NULL,
+  timeSent TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  FOREIGN KEY (authorUserId) REFERENCES user(email_id),
+  FOREIGN KEY (recipientUserId) REFERENCES user(email_id)
+);
+ 
+ 

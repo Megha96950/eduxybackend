@@ -166,8 +166,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUser(String emailid) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = userDAO.getUserByEmailId(emailid);
+		return user;
 	}
 	
 //	private <T> User getUser(T userIdentifier, IUserRetrievalStrategy<T> strategy)

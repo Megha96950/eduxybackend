@@ -6,7 +6,11 @@ public class ChatChannel {
 	  private static String userIdTwo;
 	  private static String uuid;
 
-	  public static String getUuid() {
+	  public static void setUuid(String uuid) {
+		ChatChannel.uuid = uuid;
+	}
+
+	public static String getUuid() {
 		return uuid;
 	}
 

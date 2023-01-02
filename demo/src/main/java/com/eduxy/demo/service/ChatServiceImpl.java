@@ -30,8 +30,7 @@ import com.eduxy.demo.model.User;
 @Service(value="ChatService")
 @Transactional
 public class ChatServiceImpl implements ChatService {
-	@Autowired
-	private EntityManager entityManager;
+
 	@Autowired
   private ChatChannelDAO chatChannelDAO;
 	@Autowired
@@ -58,7 +57,8 @@ public class ChatServiceImpl implements ChatService {
 		channel = chatChannelDAO.findExistingChannel(
 				ChatChannel.getUserIdOne()
 			    ,ChatChannel.getUserIdTwo());
-	
+		if(!channel.isEmpty())
+		 System.out.println(channel.get(0));
     return (channel != null && !channel.isEmpty()) ? channel.get(0).getUuid() : null;
   }
 
@@ -83,18 +83,21 @@ public class ChatServiceImpl implements ChatService {
   @Override
   public void submitMessage(ChatMessage chatMessage)
       throws BeansException, UserNotFoundException {
+	  
     ChatMessageEntity chatMessageEntity =this.mapChatDTOtoMessage(chatMessage);
-    entityManager.persist(chatMessageEntity);
-    User fromUser = userService.getUser(chatMessageEntity.getAuthorUser().getEmailId());
-    User recipientUser = userService.getUser(chatMessageEntity.getRecipientUser().getEmailId());
-      
-    userService.notifyUser(recipientUser,
-      new Notification(
-        "ChatMessageNotification",
-        fromUser.getName() + " has sent you a message",
-        chatMessageEntity.getAuthorUser().getEmailId()
-      )
-    );
+    chatMessageDAO.submitMessage(chatMessageEntity);
+  
+
+//    User fromUser = userService.getUser(chatMessageEntity.getAuthorUserId());
+//    User recipientUser = userService.getUser(chatMessageEntity.getRecipientUser().getEmailId());
+//      
+//    userService.notifyUser(recipientUser,
+//      new Notification(
+//        "ChatMessageNotification",
+//        fromUser.getName() + " has sent you a message",
+//        chatMessageEntity.getAuthorUser().getEmailId()
+//      )
+//    );
   }
  @Override
   public List<ChatMessage> getExistingChatMessages(String channelUuid) {
@@ -130,10 +133,12 @@ public class ChatServiceImpl implements ChatService {
 	  }
 
 	  public  ChatMessageEntity mapChatDTOtoMessage(ChatMessage dto) {
-	    return new ChatMessageEntity(
-	      new UserEntity(dto.getRecipientUser()),
-	      new UserEntity(dto.getAuthorUser()),
+	
+		  ChatMessageEntity c=new ChatMessageEntity(dto.getAuthorUserId(),
+	      dto.getRecipientUserId(),
 	      dto.getContents()
 	    );
+		System.out.println(c.getAuthorUserId());  
+		  return c;
 	  }
 }

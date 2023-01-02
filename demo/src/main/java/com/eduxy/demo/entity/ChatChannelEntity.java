@@ -8,22 +8,33 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Entity
-@Table(name="chatChannel")
+@Table(name="chatchannel")
 public class ChatChannelEntity {
 
   @Id
   @NotNull
   private String uuid;
   
-
+  @Column(name="useridone")
+  private String UserIdOne;
+	
+  @Column(name="useridtwo")
+  private String UserIdTwo;
 
   @OneToOne()
-  @JoinColumn(name = "UserIdOne")
+  @JoinColumn(name = "useridone", nullable=false,insertable = false, updatable = false)
   private UserEntity UserOne;
 
   @OneToOne()
-  @JoinColumn(name = "UserIdTwo")
+  @JoinColumn(name = "useridtwo", nullable=false,insertable = false, updatable = false)
   private UserEntity UserTwo;
+  
+  public ChatChannelEntity(String UserIdOne,String UserIdTwo) {
+	    this.uuid = UUID.randomUUID().toString();
+	    this.UserIdOne = UserIdOne;
+	    this.UserIdTwo = UserIdTwo;
+	  }
+
 
   public ChatChannelEntity(UserEntity UserOne, UserEntity UserTwo) {
     this.uuid = UUID.randomUUID().toString();

@@ -6,15 +6,15 @@ import java.util.Date;
 public class ChatMessage {
   
 	 private long id;
-	 private String authorUser;
-	 private String recipientUser;
+	 private String authorUserId;
+	 private String recipientUserId;
      private Date timeSent;
 	 private String contents;
      public ChatMessage() {}
 
 	  public ChatMessage(String authorUser, String recipientUser, String contents) {
-	    this.authorUser = authorUser;
-	    this.recipientUser = recipientUser;
+	    this.authorUserId = authorUser;
+	    this.recipientUserId = recipientUser;
 	    this.contents = contents;
 	   
 	  }
@@ -23,20 +23,20 @@ public class ChatMessage {
 	    return this.id;
 	  }
 	  
-	  public String getAuthorUser() {
-	    return this.authorUser;
+	  public String getAuthorUserId() {
+	    return this.authorUserId;
 	  }
 	  
-	  public String getRecipientUser() {
-	    return this.recipientUser;
+	  public String getRecipientUserId() {
+	    return this.recipientUserId;
 	  }
 
-	  public void setAuthorUser(String user) {
-	    this.recipientUser = user;
+	  public void setAuthorUserId(String user) {
+	    this.recipientUserId = user;
 	  }
 	  
-	  public void setRecipientUser(String user) {
-	    this.authorUser = user;
+	  public void setRecipientUserId(String user) {
+	    this.authorUserId = user;
 	  }
 
 	  public Date getTimeSent() {

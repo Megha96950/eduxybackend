@@ -26,4 +26,6 @@ public interface ChatMessageDAO
         String userIdOne,
        // @Param("userIdTwo")
         String userIdTwo, Pageable pageable);
+    
+    public void submitMessage(ChatMessageEntity chatMessage);
 }
