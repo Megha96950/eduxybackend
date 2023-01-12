@@ -41,6 +41,7 @@ public class ChatAPI  {
 
     @MessageMapping("/chat/{channelId}")
     @SendTo("/chat/greating")
+    
    // @PostMapping(value="chat/{channelId}")
     public ChatMessage chatMessage(@DestinationVariable String channelId,ChatMessage message)
         throws BeansException, UserNotFoundException {
