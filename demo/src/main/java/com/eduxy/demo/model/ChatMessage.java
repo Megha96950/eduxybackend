@@ -23,7 +23,15 @@ public class ChatMessage {
 	    return this.id;
 	  }
 	  
-	  public String getAuthorUserId() {
+	  public void setTimeSent(Date timeSent) {
+		this.timeSent = timeSent;
+	}
+
+	public void setContents(String contents) {
+		this.contents = contents;
+	}
+
+	public String getAuthorUserId() {
 	    return this.authorUserId;
 	  }
 	  

@@ -40,11 +40,11 @@ public class ChatAPI  {
   private UserService userService;
 
     @MessageMapping("/chat/{channelId}")
-    @SendTo("/chat/{channelId}")
+    @SendTo("/chat/greating")
    // @PostMapping(value="chat/{channelId}")
-    public ChatMessage chatMessage(@PathVariable String channelId,@RequestBody ChatMessage message)
+    public ChatMessage chatMessage(@DestinationVariable String channelId,ChatMessage message)
         throws BeansException, UserNotFoundException {
-    	System.out.println(message);
+    	System.out.println(message.getRecipientUserId());
       chatService.submitMessage(message);
 
       return message;
@@ -69,7 +69,7 @@ public class ChatAPI  {
     		  //JSONResponseHelper.createResponse(establishedChatChannel, HttpStatus.OK);
     }
     
-    @RequestMapping(value="/api/private-chat/channel/{channelUuid}", method=RequestMethod.GET, produces="application/json")
+    @PostMapping(value="/channel/{channelUuid}", produces="application/json")
     public ResponseEntity<List<ChatMessage>> getExistingChatMessages(@PathVariable("channelUuid") String channelUuid) {
       List<ChatMessage> messages = chatService.getExistingChatMessages(channelUuid);
 

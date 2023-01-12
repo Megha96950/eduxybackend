@@ -65,7 +65,7 @@ public class ChatChannelDAOImpl implements ChatChannelDAO {
 	
 	@Override
 	public ChatChannel getChannelDetails(String uuid) {
-		Query query = entityManager.createQuery("select c from chatchannel c"
+		Query query = entityManager.createQuery("select c from ChatChannelEntity c"
 				+ " where c.uuid = ?1");
 		 query.setParameter(1,"%"+uuid+"%" );
 		List<ChatChannelEntity> chatChannelEntity =query.getResultList();

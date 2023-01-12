@@ -88,22 +88,22 @@ public class ChatServiceImpl implements ChatService {
     chatMessageDAO.submitMessage(chatMessageEntity);
   
 
-//    User fromUser = userService.getUser(chatMessageEntity.getAuthorUserId());
-//    User recipientUser = userService.getUser(chatMessageEntity.getRecipientUser().getEmailId());
-//      
-//    userService.notifyUser(recipientUser,
-//      new Notification(
-//        "ChatMessageNotification",
-//        fromUser.getName() + " has sent you a message",
-//        chatMessageEntity.getAuthorUser().getEmailId()
-//      )
-//    );
+    User fromUser = userService.getUser(chatMessageEntity.getAuthorUserId());
+    User recipientUser = userService.getUser(chatMessageEntity.getRecipientUserId());
+      
+    userService.notifyUser(recipientUser,
+      new Notification(
+        "ChatMessageNotification",
+        fromUser.getName() + " has sent you a message",
+        chatMessageEntity.getAuthorUser().getEmailId()
+      )
+    );
   }
  @Override
   public List<ChatMessage> getExistingChatMessages(String channelUuid) {
     ChatChannel channel = chatChannelDAO.getChannelDetails(channelUuid);
 
-    List<ChatMessageEntity> chatMessages = 
+    List<ChatMessage> chatMessages = 
       chatMessageDAO.getExistingChatMessages(
         channel.getUserIdOne(),
         channel.getUserIdTwo(),
@@ -111,20 +111,20 @@ public class ChatServiceImpl implements ChatService {
       );
 
     // TODO: fix this
-    List<ChatMessageEntity> messagesByLatest = Lists.reverse(chatMessages); 
+    List<ChatMessage> messagesByLatest = Lists.reverse(chatMessages); 
 
     return this.mapMessagesToChatDTOs(messagesByLatest);
   }
   
-  public  List<ChatMessage> mapMessagesToChatDTOs(List<ChatMessageEntity> chatMessagesEntity) {
+  public  List<ChatMessage> mapMessagesToChatDTOs(List<ChatMessage> chatMessages) {
 	    List<ChatMessage> dtos = new ArrayList<ChatMessage>();
 
-	    for(ChatMessageEntity chatMessageEntity : chatMessagesEntity) { 
+	    for(ChatMessage chatMessage : chatMessages) { 
 	      dtos.add(
 	         new ChatMessage(
-	          chatMessageEntity.getContents(),
-	          chatMessageEntity.getAuthorUser().getEmailId(),
-	          chatMessageEntity.getRecipientUser().getEmailId()
+	          chatMessage.getContents(),
+	          chatMessage.getAuthorUserId(),
+	          chatMessage.getRecipientUserId()
 	        )
 	      );
 	    }
@@ -134,8 +134,8 @@ public class ChatServiceImpl implements ChatService {
 
 	  public  ChatMessageEntity mapChatDTOtoMessage(ChatMessage dto) {
 	
-		  ChatMessageEntity c=new ChatMessageEntity(dto.getAuthorUserId(),
-	      dto.getRecipientUserId(),
+		  ChatMessageEntity c=new ChatMessageEntity( dto.getRecipientUserId(),
+				  dto.getAuthorUserId(),
 	      dto.getContents()
 	    );
 		System.out.println(c.getAuthorUserId());  

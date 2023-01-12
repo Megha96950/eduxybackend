@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 
 
 import com.eduxy.demo.entity.ChatMessageEntity;
+import com.eduxy.demo.model.ChatMessage;
 
 
 
@@ -12,16 +13,8 @@ import com.eduxy.demo.entity.ChatMessageEntity;
 public interface ChatMessageDAO 
 //extends CrudRepository<ChatMessageEntity, String>
 {
-//    @Query(" FROM"
-//        + "    ChatMessage m"
-//        + "  WHERE"
-//        + "    m.authorUser.id IN (:userIdOne, :userIdTwo)"
-//        + "  AND"
-//        + "    m.recipientUser.id IN (:userIdOne, :userIdTwo)"
-//        + "  ORDER BY"
-//        + "    m.timeSent"
-//        + "  DESC")
-    public List<ChatMessageEntity> getExistingChatMessages(
+   
+    public List<ChatMessage> getExistingChatMessages(
        // @Param("userIdOne") 
         String userIdOne,
        // @Param("userIdTwo")
