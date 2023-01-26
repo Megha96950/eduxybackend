@@ -3,6 +3,8 @@ package com.eduxy.demo.service;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +30,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO userDAO;
-	
+	@Autowired
 	 private SimpMessagingTemplate simpMessagingTemplate;
 	
 	 
@@ -185,13 +187,21 @@ public class UserServiceImpl implements UserService {
 //		  }
 
 	 
-	  public void notifyUser(User recipientUser, Notification notification) {
+	  public void notifyUser(String ChannelId, Notification notification) {
 //		    if (this.isPresent(recipientUser)) {
-		    	simpMessagingTemplate
-		        .convertAndSend("/topic/user.notification." + recipientUser.getEmailId(), notification);
+		    	simpMessagingTemplate.convertAndSendToUser(ChannelId,"/chat",notification);
+		       //("/topic/user.notification." + recipientUser.getEmailId(), notification);
 //		    } else {
 //		      System.out.println("sending email notification to " + recipientUser.getName());
 //		
 //		    }
 		  }
+
+	@Override
+	public List<User> getFriendListFor(String Id) {
+		
+		return userDAO.getFriendListFor(Id);
+	}
+
+	
 }

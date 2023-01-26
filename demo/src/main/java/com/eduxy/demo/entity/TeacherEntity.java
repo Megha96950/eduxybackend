@@ -48,10 +48,18 @@ public class TeacherEntity {
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="teacher_id")
-	
-	
 	private List<TeacherDataEntity> data;
-
+	
+	@Column(name="user_email_id")
+	private String emailId;
+     
+	
+	public String getEmailId() {
+		return emailId;
+	}
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
 	public List<TeacherDataEntity> getData() {
 		return data;
 	}

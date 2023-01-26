@@ -57,6 +57,7 @@ public class StudentDAOImpl implements StudentDAO {
 			 Teacher teacher=new Teacher();
 			    teacher.setTeacherId(t.getTeacherId());
 				teacher.setSubjects(t.getSubjects());
+				teacher.setEmailId(t.getEmailId());
 				teacher.setIdProof(t.getIdProof());
 				//teacher.setIdPhoto(i.getIdPhoto());
 				teacher.setHigherQualification(t.getHigherQualification());

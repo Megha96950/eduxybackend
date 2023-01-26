@@ -1,5 +1,7 @@
 package com.eduxy.demo.dao;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eduxy.demo.model.Address;
@@ -26,4 +28,5 @@ public interface UserDAO {
 	public void changeName(String newName , String emailId);
 	public void changeNumber(String newNumber , String emailId);
 	public void changePassword(String newPassword , String emailId);
+	public List<User> getFriendListFor(String Id);
 }

@@ -81,7 +81,7 @@ public class ChatServiceImpl implements ChatService {
   }
   
   @Override
-  public void submitMessage(ChatMessage chatMessage)
+  public void submitMessage(ChatMessage chatMessage,String channelId)
       throws BeansException, UserNotFoundException {
 	  
     ChatMessageEntity chatMessageEntity =this.mapChatDTOtoMessage(chatMessage);
@@ -91,11 +91,11 @@ public class ChatServiceImpl implements ChatService {
     User fromUser = userService.getUser(chatMessageEntity.getAuthorUserId());
     User recipientUser = userService.getUser(chatMessageEntity.getRecipientUserId());
       
-    userService.notifyUser(recipientUser,
+    userService.notifyUser(channelId,
       new Notification(
         "ChatMessageNotification",
         fromUser.getName() + " has sent you a message",
-        chatMessageEntity.getAuthorUser().getEmailId()
+        chatMessage.getAuthorUserId()
       )
     );
   }

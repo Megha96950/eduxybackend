@@ -18,7 +18,8 @@ public class ChatChannelEntity {
   @Column(name="useridone")
   private String UserIdOne;
 	
-  @Column(name="useridtwo")
+
+@Column(name="useridtwo")
   private String UserIdTwo;
 
   @OneToOne()
@@ -63,4 +64,25 @@ public class ChatChannelEntity {
   public String getUuid() {
     return this.uuid;
   }
+
+
+public String getUserIdOne() {
+	return UserIdOne;
+}
+
+
+public void setUserIdOne(String userIdOne) {
+	UserIdOne = userIdOne;
+}
+
+
+public String getUserIdTwo() {
+	return UserIdTwo;
+}
+
+
+public void setUserIdTwo(String userIdTwo) {
+	UserIdTwo = userIdTwo;
+}
+  
 }

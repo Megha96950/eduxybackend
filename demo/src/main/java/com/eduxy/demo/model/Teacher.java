@@ -12,10 +12,16 @@ public class Teacher {
 	private byte[] degreePhoto;
 	private byte[] idPhoto;
 	private String feesCharged;
+	private String emailId;
 	
 	
 	
-	
+	public String getEmailId() {
+		return emailId;
+	}
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
 	public int getTeacherId() {
 		return teacherId;
 	}

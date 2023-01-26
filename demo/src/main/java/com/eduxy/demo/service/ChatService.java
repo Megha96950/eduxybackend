@@ -14,6 +14,6 @@ public interface ChatService {
 	public String getExistingChannel(ChatChannel chatChannel);
     public String newChatSession(ChatChannel chatChannel)throws BeansException,UserNotFoundException;
     public String establishChatSession(ChatChannel chatChannel) throws IsSameUserException, BeansException,UserNotFoundException;
-    public void submitMessage(ChatMessage chatMessage)throws BeansException, UserNotFoundException ;
+    public void submitMessage(ChatMessage chatMessage,String ChannelId)throws BeansException, UserNotFoundException ;
     public List<ChatMessage> getExistingChatMessages(String channelUuid) ;
 }

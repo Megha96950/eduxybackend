@@ -12,6 +12,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -40,13 +41,13 @@ public class ChatAPI  {
   private UserService userService;
 
     @MessageMapping("/chat/{channelId}")
-    @SendTo("/chat/greating")
+    @SendTo("/chat/{channelId}")
     
    // @PostMapping(value="chat/{channelId}")
     public ChatMessage chatMessage(@DestinationVariable String channelId,ChatMessage message)
         throws BeansException, UserNotFoundException {
     	System.out.println(message.getRecipientUserId());
-      chatService.submitMessage(message);
+      chatService.submitMessage(message,channelId);
 
       return message;
     }
@@ -70,11 +71,19 @@ public class ChatAPI  {
     		  //JSONResponseHelper.createResponse(establishedChatChannel, HttpStatus.OK);
     }
     
+    @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(value="/channel/{channelUuid}", produces="application/json")
     public ResponseEntity<List<ChatMessage>> getExistingChatMessages(@PathVariable("channelUuid") String channelUuid) {
       List<ChatMessage> messages = chatService.getExistingChatMessages(channelUuid);
 
       return new ResponseEntity<List<ChatMessage>>(messages,HttpStatus.OK);
     		  //JSONResponseHelper.createResponse(messages, HttpStatus.OK);
+    }
+    
+    @GetMapping(value="/friend/{Id}")
+    public ResponseEntity<List<User>> getFriendListFor(@PathVariable String Id){
+    	List<User> users =userService.getFriendListFor(Id);
+    	return new ResponseEntity<List<User>>(users,HttpStatus.OK);
+    	
     }
 }

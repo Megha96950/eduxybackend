@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 
 import com.eduxy.demo.entity.AddressEntity;
+import com.eduxy.demo.entity.ChatChannelEntity;
 import com.eduxy.demo.entity.StudentEntity;
 import com.eduxy.demo.entity.TeacherEntity;
 import com.eduxy.demo.entity.UserEntity;
@@ -279,6 +280,25 @@ public class UserDAOImpl implements UserDAO {
 		userEntity.setPassword(newPassword);;
 		entityManager.persist(userEntity);
 		
+	}
+
+	@Override
+	public List<User> getFriendListFor(String Id) {
+		 Query query = entityManager.createQuery("select c from ChatChannelEntity c where c.UserIdOne = ?1 or c.UserIdTwo = ?1 ");
+		 query.setParameter(1,Id);
+		 List<ChatChannelEntity> chatChannelEntity =query.getResultList();
+		 List<User> users =new ArrayList();
+		 for(ChatChannelEntity c : chatChannelEntity) {
+			 User user= new User();
+			 if(c.getUserIdOne().equals(Id))
+			 user =this.getUserByEmailId(c.getUserIdTwo());
+			 else
+			 user =this.getUserByEmailId(c.getUserIdOne());
+			 users.add(user);
+		 }
+		 
+		 
+		return users;
 	}
 
 }
