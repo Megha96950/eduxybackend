@@ -22,14 +22,17 @@ public class ChatMessageEntity {
   private String authorUserId;
 
   @NotNull
-	
   @Column(name="time_sent")
   private Date timeSent;
 
   @NotNull
   @Column(name="contents")
   private String contents;
+  
  
+ 
+
+
   @OneToOne()
   @JoinColumn(name = "author_User_Id",insertable = false, updatable = false)
   private UserEntity authorUser;
@@ -38,7 +41,7 @@ public class ChatMessageEntity {
   @JoinColumn(name = "recipient_User_Id",insertable = false, updatable = false)
   private UserEntity recipientUser;
   
-
+ 
 
 //   @OneToOne
 //  @JoinColumn(name = "authorUserId")
@@ -52,7 +55,8 @@ public class ChatMessageEntity {
 
 
   public ChatMessageEntity() {}
-  public ChatMessageEntity(String user,String user2, String contents) {
+  public ChatMessageEntity(String channelID,String user,String user2, String contents) {
+	  
 	    this.authorUserId = user;
 	    this.recipientUserId = user2;
 	    this.contents = contents;
@@ -60,7 +64,8 @@ public class ChatMessageEntity {
 	  }
 	  
 
-  public String getRecipientUserId() {
+
+public String getRecipientUserId() {
 	return recipientUserId;
 }
 public void setRecipientUserId(String recipientUserId) {
@@ -109,4 +114,6 @@ public ChatMessageEntity(UserEntity user, UserEntity user2, String contents) {
   public String getContents() {
     return this.contents;
   }
+  
+
 }

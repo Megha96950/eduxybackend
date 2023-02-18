@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,16 +40,17 @@ public class ChatAPI  {
 
   @Autowired
   private UserService userService;
+  @Autowired
+  private SimpMessagingTemplate simpMessagingTemplate;
 
-    @MessageMapping("/chat/{channelId}")
-    @SendTo("/chat/{channelId}")
-    
-   // @PostMapping(value="chat/{channelId}")
+    @MessageMapping("/chat/{channelId}")  
+   @SendTo("/topic/message/{channelId}")
     public ChatMessage chatMessage(@DestinationVariable String channelId,ChatMessage message)
         throws BeansException, UserNotFoundException {
     	System.out.println(message.getRecipientUserId());
       chatService.submitMessage(message,channelId);
-
+    //  simpMessagingTemplate.convertAndSend("/topic/message/"+channelId,message);
+      
       return message;
     }
 
@@ -74,8 +76,13 @@ public class ChatAPI  {
     @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(value="/channel/{channelUuid}", produces="application/json")
     public ResponseEntity<List<ChatMessage>> getExistingChatMessages(@PathVariable("channelUuid") String channelUuid) {
+    	  System.out.println(channelUuid);
       List<ChatMessage> messages = chatService.getExistingChatMessages(channelUuid);
-
+   
+     for(ChatMessage t:messages) {
+    	System.out.println(t.getContents());
+     }
+      
       return new ResponseEntity<List<ChatMessage>>(messages,HttpStatus.OK);
     		  //JSONResponseHelper.createResponse(messages, HttpStatus.OK);
     }
@@ -84,6 +91,6 @@ public class ChatAPI  {
     public ResponseEntity<List<User>> getFriendListFor(@PathVariable String Id){
     	List<User> users =userService.getFriendListFor(Id);
     	return new ResponseEntity<List<User>>(users,HttpStatus.OK);
-    	
-    }
+  }
+
 }

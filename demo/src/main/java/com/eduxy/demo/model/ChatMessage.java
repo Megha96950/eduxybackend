@@ -10,13 +10,17 @@ public class ChatMessage {
 	 private String recipientUserId;
      private Date timeSent;
 	 private String contents;
-     public ChatMessage() {}
+	
+	
+
+	public ChatMessage() {}
 
 	  public ChatMessage(String authorUser, String recipientUser, String contents) {
+		 
 	    this.authorUserId = authorUser;
 	    this.recipientUserId = recipientUser;
 	    this.contents = contents;
-	   
+	    this.timeSent = new Date();
 	  }
 	  
 	  public long getId() {
@@ -54,5 +58,9 @@ public class ChatMessage {
 	  public String getContents() {
 	    return this.contents;
 	  }
+
+	
+	
+	 
   
 }

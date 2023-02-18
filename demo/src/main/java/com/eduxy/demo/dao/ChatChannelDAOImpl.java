@@ -38,7 +38,7 @@ public class ChatChannelDAOImpl implements ChatChannelDAO {
 			channel.setUserIdTwo(userTwoId);
 			channel.setUuid(t.getUuid());
 			channels.add(channel);
-			 System.out.println(channel);
+		
 		 }
 		
 		return channels;
@@ -65,17 +65,19 @@ public class ChatChannelDAOImpl implements ChatChannelDAO {
 	
 	@Override
 	public ChatChannel getChannelDetails(String uuid) {
+		System.out.println(uuid);
 		Query query = entityManager.createQuery("select c from ChatChannelEntity c"
 				+ " where c.uuid = ?1");
-		 query.setParameter(1,"%"+uuid+"%" );
+		 query.setParameter(1,uuid );
 		List<ChatChannelEntity> chatChannelEntity =query.getResultList();
+		System.out.println(chatChannelEntity.get(0).getUserIdOne()+"   "+chatChannelEntity.get(0).getUserIdTwo());
 		ChatChannel channel =new ChatChannel();
 		for(ChatChannelEntity t: chatChannelEntity) {
 			
 			channel.setUserIdOne(t.getUserOne().getEmailId());
 			channel.setUserIdTwo(t.getUserTwo().getEmailId());
 			
-			 
+			
 		 }
 		return channel;
 	}

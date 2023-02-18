@@ -26,13 +26,16 @@ public class ChatMessageDAOImpl implements ChatMessageDAO {
 				+ " c.recipientUserId in (?1 ,?2) order by c.timeSent desc");
 		query.setParameter(1,userIdOne);
 		query.setParameter(2,userIdTwo);
+		
 		List<ChatMessageEntity> chatMessageEntity =query.getResultList();
 		List<ChatMessage> messages =new ArrayList();
 		for(ChatMessageEntity t: chatMessageEntity) {
+			
 		    ChatMessage message=new ChatMessage();
 		    message.setAuthorUserId(t.getAuthorUserId());
 		    message.setRecipientUserId(t.getRecipientUserId());
 		    message.setContents(t.getContents());
+		    message.setTimeSent(t.getTimeSent());
 			messages.add(message);
 			 
 		 }

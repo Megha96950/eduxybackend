@@ -213,7 +213,13 @@ public class UserAPI {
 
 	 }
 	 
+	 @PostMapping("/user/{emailId:.+}")
+	 public ResponseEntity<User> getUserByEmail(@PathVariable("emailId") String emailId){
 	 
-	
+		User user= userService.getUser(emailId);
+		return new ResponseEntity<User>(user, HttpStatus.OK);
+		 
+	 }
+	 
 	
 }

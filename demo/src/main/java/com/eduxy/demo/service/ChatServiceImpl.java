@@ -83,7 +83,7 @@ public class ChatServiceImpl implements ChatService {
   @Override
   public void submitMessage(ChatMessage chatMessage,String channelId)
       throws BeansException, UserNotFoundException {
-	  
+	
     ChatMessageEntity chatMessageEntity =this.mapChatDTOtoMessage(chatMessage);
     chatMessageDAO.submitMessage(chatMessageEntity);
   
@@ -102,7 +102,7 @@ public class ChatServiceImpl implements ChatService {
  @Override
   public List<ChatMessage> getExistingChatMessages(String channelUuid) {
     ChatChannel channel = chatChannelDAO.getChannelDetails(channelUuid);
-
+    
     List<ChatMessage> chatMessages = 
       chatMessageDAO.getExistingChatMessages(
         channel.getUserIdOne(),
@@ -122,9 +122,9 @@ public class ChatServiceImpl implements ChatService {
 	    for(ChatMessage chatMessage : chatMessages) { 
 	      dtos.add(
 	         new ChatMessage(
-	          chatMessage.getContents(),
 	          chatMessage.getAuthorUserId(),
-	          chatMessage.getRecipientUserId()
+	          chatMessage.getRecipientUserId(),
+	          chatMessage.getContents()
 	        )
 	      );
 	    }
@@ -134,7 +134,7 @@ public class ChatServiceImpl implements ChatService {
 
 	  public  ChatMessageEntity mapChatDTOtoMessage(ChatMessage dto) {
 	
-		  ChatMessageEntity c=new ChatMessageEntity( dto.getRecipientUserId(),
+		  ChatMessageEntity c=new ChatMessageEntity(dto.getAuthorUserId(), dto.getRecipientUserId(),
 				  dto.getAuthorUserId(),
 	      dto.getContents()
 	    );
