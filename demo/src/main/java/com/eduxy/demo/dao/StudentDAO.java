@@ -9,4 +9,5 @@ public interface StudentDAO    {
 	public Integer uploadIdPhoto(String userEmailId, byte[] idPhoto,Integer id);
 	
 	public List<Teacher> searchTeacher(String searchString);
+	public Integer displayImage(String userEmailId, String displayImage,Integer id);
 }

@@ -12,7 +12,15 @@ public class Student {
 	private String standard;
 	private String motherName;
 	private String fatherName;
+	private String displayImg;
 	
+	
+	public String getDisplayImg() {
+		return displayImg;
+	}
+	public void setDisplayImg(String displayImg) {
+		this.displayImg = displayImg;
+	}
 	public int getStudentId() {
 		return StudentId;
 	}

@@ -2,18 +2,21 @@ package com.eduxy.demo.service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.zip.Deflater;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eduxy.demo.dao.TeacherDAO;
 import com.eduxy.demo.dao.UserDAO;
 import com.eduxy.demo.model.Teacher;
 import com.eduxy.demo.model.User;
+
 
 
 @Service( value = "teacherService" )
@@ -28,7 +31,8 @@ public class TeacherServiceImpl implements TeacherService{
 	@Override
 	public Integer uploadIdPhoto(String userEmailId, MultipartFile idPhoto, Integer id) throws Exception {
 		User user=null;
-        Integer dataID = teacherDAO.uploadIdPhoto(userEmailId , compressBytes(idPhoto.getBytes()), id) ;
+		String fileName = StringUtils.cleanPath(idPhoto.getOriginalFilename());
+        Integer dataID = teacherDAO.uploadIdPhoto(userEmailId , Base64.getEncoder().encodeToString(idPhoto.getBytes()), id) ;
 
       return dataID;  
 	

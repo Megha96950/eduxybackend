@@ -9,5 +9,6 @@ import com.eduxy.demo.model.Teacher;
 public interface StudentService {
 	public Integer uploadIdPhoto(String userEmailId, MultipartFile idPhoto, Integer id) throws Exception;
 	  public List<Teacher> searchTeacher(String Keyword);
+	  public Integer uplaodDisplayImg(String userEmailId, MultipartFile displayImg,Integer id) throws Exception;
 
 }

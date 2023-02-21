@@ -24,7 +24,7 @@ import com.eduxy.demo.service.StudentService;
 
 
 
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping("StudentAPI")
 public class StudentAPI {
@@ -82,6 +82,28 @@ public class StudentAPI {
  			  }	 
  		
   
+      }
+      
+     
+      @PostMapping("/uploadImage/{userEmailId:.+}/{id:.+}")
+      public  ResponseEntity<String> uplaodDisplayImg(@PathVariable("userEmailId") String userEmailId,
+    		  @RequestParam("Display_Image") MultipartFile displayImage,@PathVariable("id") Integer id){
+    	  try
+			{
+				
+				Integer dataID= studentService.uplaodDisplayImg(userEmailId, displayImage,id);
+			
+				String message=environment.getProperty("studentAPI.STUDENT_DISPLAYIMAGE_SUCCESS");
+				String s=message+dataID;
+				
+				
+				return new ResponseEntity<String>(s, HttpStatus.OK);
+			}
+			catch (Exception e) {
+				
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, environment.getProperty(e.getMessage()));
+			  }	 
+    
       }
 	 
 }

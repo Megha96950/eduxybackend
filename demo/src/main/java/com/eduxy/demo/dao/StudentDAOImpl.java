@@ -70,6 +70,17 @@ public class StudentDAOImpl implements StudentDAO {
 		return teachers;
 	}
 
+	@Override
+	public Integer displayImage(String userEmailId, String displayImage,Integer id) {
+		StudentEntity studentEntity = null;
+		Integer dataId = null;
+		studentEntity  = entityManager.find(StudentEntity.class, id);
+		studentEntity.setDisplayImg(displayImage);
+		entityManager.persist(studentEntity);			
+		return id;
+		
+	}
+
 //private FullTextQuery searchUsersQuery (String searchText) {
 //		
 //		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);

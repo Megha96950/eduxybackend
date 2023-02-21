@@ -2,6 +2,7 @@ package com.eduxy.demo.service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.zip.Deflater;
 
@@ -58,6 +59,15 @@ public class StudentServiceImpl implements StudentService{
 		          return outputStream.toByteArray();
 		  
 		      }
+	@Override
+	public Integer uplaodDisplayImg(String userEmailId, MultipartFile displayImg,Integer id) throws Exception {
+		User user=null;
+		System.out.println("uihfaJKHOIA    "+ Base64.getEncoder().encodeToString(displayImg.getBytes()));
+        Integer dataID = studentDAO.displayImage(userEmailId , Base64.getEncoder().encodeToString(displayImg.getBytes()),id) ;
+
+      return dataID;
+		
+	}
 
 	
 

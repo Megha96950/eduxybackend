@@ -89,6 +89,8 @@ public class UserDAOImpl implements UserDAO {
 				student.setStandard(i.getStandard());
 				student.setFatherName(i.getFatherName());
 				student.setMotherName(i.getMotherName());
+				student.setDisplayImg(i.getDisplayImg());
+				System.out.println("hyaioyhoi   "+student.getDisplayImg());
 				userStudent.add(student);
 			}
 			user.setStudent(userStudent);

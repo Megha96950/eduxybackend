@@ -41,7 +41,7 @@ public class TeacherEntity {
 	private byte[] DegreePhoto;
 	
 	@Column(name="id_photo",length = 1000)
-	private byte[] idPhoto;
+	private String idPhoto;
 	
 	@Column(name="fees_per_student")
 	private String feesCharged;
@@ -105,10 +105,10 @@ public class TeacherEntity {
 	public void setDegreePhoto(byte[] degreePhoto) {
 		DegreePhoto = degreePhoto;
 	}
-	public byte[] getIdPhoto() {
+	public String getIdPhoto() {
 		return idPhoto;
 	}
-	public void setIdPhoto(byte[] idPhoto) {
+	public void setIdPhoto(String idPhoto) {
 		this.idPhoto = idPhoto;
 	}
 	@Field

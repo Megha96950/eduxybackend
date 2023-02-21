@@ -19,7 +19,7 @@ public class TeacherDAOImpl implements TeacherDAO {
 	private EntityManager entityManager;
 	
 	@Override
-	public Integer uploadIdPhoto(String userEmailId, byte[] idPhoto,Integer id) {
+	public Integer uploadIdPhoto(String userEmailId, String idPhoto,Integer id) {
 	
 		
 		TeacherEntity teacherEntity = null;
