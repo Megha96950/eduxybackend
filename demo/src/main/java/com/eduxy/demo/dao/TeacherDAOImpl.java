@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.eduxy.demo.entity.AddressEntity;
-
+import com.eduxy.demo.entity.StudentEntity;
 import com.eduxy.demo.entity.TeacherEntity;
 import com.eduxy.demo.entity.UserEntity;
 
@@ -52,6 +52,15 @@ public class TeacherDAOImpl implements TeacherDAO {
 		entityManager.persist(teacherEntity);	
 	}
 
-	
+	@Override
+	public Integer displayImage(String userEmailId, String displayImage,Integer id) {
+		TeacherEntity teacherEntity = null;
+		Integer dataId = null;
+		teacherEntity  = entityManager.find(TeacherEntity.class, id);
+		teacherEntity.setDisplayImg(displayImage);
+		entityManager.persist(teacherEntity);			
+		return id;
+		
+	}
 
 }

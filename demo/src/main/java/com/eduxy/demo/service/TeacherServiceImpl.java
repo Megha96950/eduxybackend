@@ -53,7 +53,17 @@ public class TeacherServiceImpl implements TeacherService{
 		
 	}
 	
-	
+	@Override
+	public Integer uplaodDisplayImg(String userEmailId, MultipartFile displayImg,Integer id) throws Exception {
+		User user=null;
+		System.out.println("uihfaJKHOIA    "+ Base64.getEncoder().encodeToString(displayImg.getBytes()));
+        Integer dataID = teacherDAO.displayImage(userEmailId , Base64.getEncoder().encodeToString(displayImg.getBytes()),id) ;
+
+      return dataID;
+		
+	}
+
+
 
 
 	  public static byte[] compressBytes(byte[] data) {

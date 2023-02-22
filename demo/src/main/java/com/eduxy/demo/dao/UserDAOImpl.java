@@ -90,7 +90,7 @@ public class UserDAOImpl implements UserDAO {
 				student.setFatherName(i.getFatherName());
 				student.setMotherName(i.getMotherName());
 				student.setDisplayImg(i.getDisplayImg());
-				System.out.println("hyaioyhoi   "+student.getDisplayImg());
+			
 				userStudent.add(student);
 			}
 			user.setStudent(userStudent);
@@ -105,6 +105,7 @@ public class UserDAOImpl implements UserDAO {
 				teacher.setFeesCharged(i.getFeesCharged());
 				teacher.setDescription(i.getDescription());
 				teacher.setDegreePhoto(i.getDegreePhoto());
+				teacher.setDisplayImg(i.getDisplayImg());
 				
 				userTeacher.add(teacher);
 			}

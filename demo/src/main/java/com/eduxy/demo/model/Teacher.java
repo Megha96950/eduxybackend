@@ -13,9 +13,18 @@ public class Teacher {
 	private String idPhoto;
 	private String feesCharged;
 	private String emailId;
+	private String displayImg;
 	
 	
 	
+	
+	
+	public String getDisplayImg() {
+		return displayImg;
+	}
+	public void setDisplayImg(String displayImg) {
+		this.displayImg = displayImg;
+	}
 	public String getEmailId() {
 		return emailId;
 	}

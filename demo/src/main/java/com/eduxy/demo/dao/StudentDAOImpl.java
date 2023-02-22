@@ -64,6 +64,7 @@ public class StudentDAOImpl implements StudentDAO {
 				teacher.setFeesCharged(t.getFeesCharged());
 				teacher.setDescription(t.getDescription());
 				//teacher.setDegreePhoto(i.getDegreePhoto());
+				teacher.setDisplayImg(t.getDisplayImg());
 				teachers.add(teacher);
 			 
 		 }

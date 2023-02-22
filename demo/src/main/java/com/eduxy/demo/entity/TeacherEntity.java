@@ -53,7 +53,16 @@ public class TeacherEntity {
 	@Column(name="user_email_id")
 	private String emailId;
      
+	@Column(name="display_pic")
+	private String displayImg;
 	
+	
+	public String getDisplayImg() {
+		return displayImg;
+	}
+	public void setDisplayImg(String displayImg) {
+		this.displayImg = displayImg;
+	}
 	public String getEmailId() {
 		return emailId;
 	}
