@@ -72,7 +72,7 @@ public class StudentAPI {
  			
  				System.out.println(teachers);
  				
- 				String message=environment.getProperty("studentAPI.STUDENT_IDPHOTO_SUCCESS");
+ 				String message=environment.getProperty("studentAPI.STUDENT_SEARCH_TEACHER");
  				
  				return new ResponseEntity<List<Teacher>>(teachers, HttpStatus.OK);
  			}

@@ -13,8 +13,17 @@ public class Student {
 	private String motherName;
 	private String fatherName;
 	private String displayImg;
+	private String name;
 	
 	
+	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getDisplayImg() {
 		return displayImg;
 	}

@@ -14,11 +14,19 @@ public class Teacher {
 	private String feesCharged;
 	private String emailId;
 	private String displayImg;
+	private String name;
 	
 	
 	
 	
 	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getDisplayImg() {
 		return displayImg;
 	}

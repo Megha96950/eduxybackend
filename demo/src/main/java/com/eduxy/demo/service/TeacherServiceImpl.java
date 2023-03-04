@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.eduxy.demo.dao.TeacherDAO;
 import com.eduxy.demo.dao.UserDAO;
+import com.eduxy.demo.model.Student;
 import com.eduxy.demo.model.Teacher;
 import com.eduxy.demo.model.User;
 
@@ -64,7 +65,12 @@ public class TeacherServiceImpl implements TeacherService{
 	}
 
 
-
+	@Override
+	public List<Student> searchStudent(String Keyword) {
+		List<Student> students=teacherDAO.searchStudent(Keyword);
+		
+		return students; 
+	}
 
 	  public static byte[] compressBytes(byte[] data) {
 		Deflater deflater = new Deflater(); 

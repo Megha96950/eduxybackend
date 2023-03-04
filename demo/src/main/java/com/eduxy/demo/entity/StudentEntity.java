@@ -44,6 +44,19 @@ public class StudentEntity {
 	@Column(name="display_pic")
 	private String displayImg;
 	
+	@Column(name="name")
+	private String name;
+	
+	
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getDisplayImg() {
 		return displayImg;
 	}

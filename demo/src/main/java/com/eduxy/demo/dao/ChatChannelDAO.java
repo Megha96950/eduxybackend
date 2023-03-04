@@ -11,8 +11,7 @@ import com.eduxy.demo.model.ChatChannel;
 import javax.transaction.Transactional;
 import java.util.List;
 
-//@Transactional
-//@Repository
+
 public interface  ChatChannelDAO 
 //extends CrudRepository<ChatChannelEntity, String> 
 {

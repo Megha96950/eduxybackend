@@ -246,7 +246,7 @@ public class UserDAOImpl implements UserDAO {
 		newTeacher.setFeesCharged(teacher.getFeesCharged());
 		newTeacher.setDescription(teacher.getDescription());
 		//newTeacher.setDegreePhoto(degreePhoto.getBytes());
-		
+		newTeacher.setName(teacher.getName());
 		userTeacherEntities.add(newTeacher);
 		userEntity.setTeacherEntity(userTeacherEntities);
 		

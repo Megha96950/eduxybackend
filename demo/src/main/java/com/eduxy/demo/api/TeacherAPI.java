@@ -1,5 +1,7 @@
 package com.eduxy.demo.api;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.eduxy.demo.model.Student;
+import com.eduxy.demo.model.Teacher;
 import com.eduxy.demo.model.User;
 import com.eduxy.demo.service.TeacherService;
 
@@ -126,5 +130,26 @@ public class TeacherAPI {
 		  }	 
 
  }
+ 
+ @PostMapping("/searchTeacher/{keyword:.+}")
+	 
+ public ResponseEntity<List<Student>> searchTeacher(@PathVariable String keyword) throws Exception {
+
+            try{
+         
+			List<Student> students= teacherService.searchStudent(keyword);
+			
+			String message=environment.getProperty("teacherAPI.STUDENT_SEARCH_STUDENT");
+			
+			return new ResponseEntity<List<Student>>(students, HttpStatus.OK);
+		}
+		catch (Exception e) {
+			
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, environment.getProperty(e.getMessage()));
+	    }	 
+	
+
+ }
+ 
 
 }

@@ -11,6 +11,7 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,7 @@ import com.eduxy.demo.model.ChatMessage;
 import com.eduxy.demo.model.EstablishedChatConnection;
 import com.eduxy.demo.model.User;
 import com.eduxy.demo.service.ChatService;
+import com.eduxy.demo.service.NotificationService;
 import com.eduxy.demo.service.UserService;
 
 @CrossOrigin
@@ -42,13 +44,18 @@ public class ChatAPI  {
   private UserService userService;
   @Autowired
   private SimpMessagingTemplate simpMessagingTemplate;
+  @Autowired
+  private NotificationService notificationService;
 
     @MessageMapping("/chat/{channelId}")  
-   @SendTo("/topic/message/{channelId}")
-    public ChatMessage chatMessage(@DestinationVariable String channelId,ChatMessage message)
-        throws BeansException, UserNotFoundException {
-    	System.out.println(message.getRecipientUserId());
+    @SendTo("/topic/message/{channelId}")
+    public ChatMessage chatMessage(@DestinationVariable String channelId,ChatMessage message) 
+        throws BeansException, UserNotFoundException,InterruptedException {
+
       chatService.submitMessage(message,channelId);
+      
+      simpMessagingTemplate.convertAndSendToUser(channelId,"/topic/private-notifications", message);
+     // notificationService.sendPrivateNotification(message.getRecipientUserId());
     //  simpMessagingTemplate.convertAndSend("/topic/message/"+channelId,message);
       
       return message;
