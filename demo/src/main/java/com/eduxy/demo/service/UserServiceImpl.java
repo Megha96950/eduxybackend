@@ -203,5 +203,10 @@ public class UserServiceImpl implements UserService {
 		return userDAO.getFriendListFor(Id);
 	}
 
+	@Override
+	public List<User> getAllUsers() {
+	 return userDAO.getAllUsers();
+	}
+
 	
 }

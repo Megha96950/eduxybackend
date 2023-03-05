@@ -29,4 +29,5 @@ public interface UserDAO {
 	public void changeNumber(String newNumber , String emailId);
 	public void changePassword(String newPassword , String emailId);
 	public List<User> getFriendListFor(String Id);
+	public List<User> getAllUsers();
 }

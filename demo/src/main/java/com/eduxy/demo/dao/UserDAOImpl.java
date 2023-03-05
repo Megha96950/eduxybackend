@@ -2,10 +2,12 @@ package com.eduxy.demo.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +18,7 @@ import com.eduxy.demo.entity.StudentEntity;
 import com.eduxy.demo.entity.TeacherEntity;
 import com.eduxy.demo.entity.UserEntity;
 import com.eduxy.demo.model.Address;
+import com.eduxy.demo.model.Message;
 import com.eduxy.demo.model.Student;
 import com.eduxy.demo.model.Teacher;
 import com.eduxy.demo.model.User;
@@ -26,6 +29,9 @@ public class UserDAOImpl implements UserDAO {
 	
 	@Autowired
 	private EntityManager entityManager;
+	
+	@Autowired
+	private ModelMapper modelMapper;
 	
 	@Override
 	public String authenticateUser(String emailId, String password) {
@@ -302,6 +308,16 @@ public class UserDAOImpl implements UserDAO {
 		 
 		 
 		return users;
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		Query query =entityManager.createQuery("Select * from UserEntity");
+		List<UserEntity> userEntities =query.getResultList();
+		List<User> users = userEntities.stream()
+				.map(u->modelMapper.map(u,User.class))
+				.collect(Collectors.toList());
+ 		return users;
 	}
 
 }

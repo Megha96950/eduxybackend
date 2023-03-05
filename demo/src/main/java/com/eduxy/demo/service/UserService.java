@@ -31,5 +31,5 @@ public interface UserService {
 	public User getUser(String emailid);
 	public Boolean getUserExist(String emailid);
 	public void notifyUser(String channelId, Notification notification);
-	    
+	public List<User> getAllUsers();
 }

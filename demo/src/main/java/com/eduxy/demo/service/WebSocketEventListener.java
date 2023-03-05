@@ -24,9 +24,11 @@ import lombok.Data;
 @Component
 @Data
 public class WebSocketEventListener {
-	  private Set<OnlineUserDto> onlineUsrs;
+	   private Set<OnlineUserDto> onlineUsrs;
 
-	    @Autowired
+	   
+
+		@Autowired
 	    private SimpMessageSendingOperations messagingTemplate;
 
 	    @Autowired
@@ -34,6 +36,7 @@ public class WebSocketEventListener {
 	    
 	    @Autowired
 	    private ModelMapper modelMapper;
+	    
 
 	    @EventListener
 	    public void handleWebSocketConnectListener(SessionConnectedEvent event) {
@@ -70,5 +73,13 @@ public class WebSocketEventListener {
 	                .collect(Collectors.toList()).get(0);
 	        this.onlineUsrs.remove(offlineUsr);
 	    }
+	    
+	    public Set<OnlineUserDto> getOnlineUsrs() {
+			return onlineUsrs;
+		}
+
+		public void setOnlineUsrs(Set<OnlineUserDto> onlineUsrs) {
+			this.onlineUsrs = onlineUsrs;
+		}
 
 }
