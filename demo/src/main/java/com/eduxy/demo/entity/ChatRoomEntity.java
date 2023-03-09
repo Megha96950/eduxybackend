@@ -5,10 +5,6 @@ import javax.persistence.*;
 import lombok.*;
 @Entity
 @Table(name = "chatroom")
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class ChatRoomEntity {
 	 @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,4 +18,38 @@ public class ChatRoomEntity {
 
 	    @Column(name="recipient_id")
 	    private String recipientId;
+
+		public Integer getId() {
+			return id;
+		}
+
+		public void setId(Integer id) {
+			this.id = id;
+		}
+
+		public String getChatroomId() {
+			return chatroomId;
+		}
+
+		public void setChatroomId(String chatroomId) {
+			this.chatroomId = chatroomId;
+		}
+
+		public String getSenderId() {
+			return senderId;
+		}
+
+		public void setSenderId(String senderId) {
+			this.senderId = senderId;
+		}
+
+		public String getRecipientId() {
+			return recipientId;
+		}
+
+		public void setRecipientId(String recipientId) {
+			this.recipientId = recipientId;
+		}
+	    
+	    
 }

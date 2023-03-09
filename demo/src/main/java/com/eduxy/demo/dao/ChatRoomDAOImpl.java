@@ -31,5 +31,22 @@ public class ChatRoomDAOImpl implements ChatRoomDAO {
 		ChatRoom chatRoom =modelMapper.map(chatRoomEntity.get(0),ChatRoom.class);
 		return chatRoom;
 	}
+	
+	@Override
+	public String createChatRoom(String chatroomId, String senderId,String recipentId) {
+		ChatRoomEntity chatRoomEntity=new ChatRoomEntity();
+		try {
+		chatRoomEntity.setChatroomId(chatroomId);
+		chatRoomEntity.setSenderId(senderId);
+		chatRoomEntity.setRecipientId(recipentId);
+		entityManager.persist(chatRoomEntity);
+		
+		return chatroomId;
+		}catch(Exception ex) {
+			return null;
+			
+		}
+		
+	}
 
 }

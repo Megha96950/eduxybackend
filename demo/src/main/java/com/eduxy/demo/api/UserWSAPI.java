@@ -36,8 +36,9 @@ public class UserWSAPI {
 	    
 	    @GetMapping("/{currentUserId}")
 	    public ResponseEntity<List<OnlineUserDto>> getOnlineUsers(@PathVariable String currentUserId) {
+	    	
 	        List<OnlineUserDto>usersWithStatus = new ArrayList<>();
-           List<User> users =userService.getAllUsers();
+            List<User> users =userService.getAllUsers();
 	        List<OnlineUserDto>offlineUsers = users.stream().map(u->modelMapper.map(u,OnlineUserDto.class)).collect(Collectors.toList());
 	        offlineUsers.stream().map(u->{
 	            u.setStatus("OFFLINE");
