@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
@@ -51,8 +52,8 @@ public class UserAPI {
 			User userfromDB = userService.authenticateUser(user.getEmailId(), user.getPassword());
 			
 			logger.info("USER LOGIN SUCCESS, USER EMAIL : "+userfromDB.getEmailId());
-			
-			return new ResponseEntity<User>(userfromDB, HttpStatus.OK);
+			  HttpHeaders httpHeaders = new HttpHeaders();
+			return new ResponseEntity<User>(userfromDB,httpHeaders, HttpStatus.OK);
 		} 
 		catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, environment.getProperty(e.getMessage()));

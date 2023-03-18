@@ -312,11 +312,12 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public List<User> getAllUsers() {
-		Query query =entityManager.createQuery("Select * from UserEntity");
+		Query query =entityManager.createQuery("Select u from UserEntity u");
 		List<UserEntity> userEntities =query.getResultList();
 		List<User> users = userEntities.stream()
 				.map(u->modelMapper.map(u,User.class))
 				.collect(Collectors.toList());
+	//	System.out.println("............................................................................" +users.get(0).getName());
  		return users;
 	}
 

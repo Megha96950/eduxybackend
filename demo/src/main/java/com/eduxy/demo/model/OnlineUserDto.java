@@ -10,19 +10,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OnlineUserDto {
-	private String userId;
+	private String emailId;
     private String sessionId;
-    private String username;
+    private String name;
     private Integer noOfNewMessages;
     private String status;
 
     
-    public String getUserId() {
-		return userId;
+    public String getEmailId() {
+		return emailId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setEmailId(String userId) {
+		this.emailId = userId;
 	}
 
 	public String getSessionId() {
@@ -33,12 +33,12 @@ public class OnlineUserDto {
 		this.sessionId = sessionId;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getName() {
+		return name;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setName(String username) {
+		this.name = username;
 	}
 
 	public Integer getNoOfNewMessages() {
@@ -60,7 +60,7 @@ public class OnlineUserDto {
 	@Override
     public int hashCode() {
         int prime = 31;
-        return prime+ ((userId==null)?0:prime+userId.hashCode());
+        return prime+ ((emailId==null)?0:prime+emailId.hashCode());
     }
 
     @Override
@@ -69,7 +69,7 @@ public class OnlineUserDto {
             return false;
         }
         OnlineUserDto user = (OnlineUserDto) obj;
-        if(!this.userId.equals(((OnlineUserDto) obj).getUserId())){
+        if(!this.emailId.equals(((OnlineUserDto) obj).getEmailId())){
             return false;
         }
         else if(!this.sessionId.equals(((OnlineUserDto) obj).sessionId)){

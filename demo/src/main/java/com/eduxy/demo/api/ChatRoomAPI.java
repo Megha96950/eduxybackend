@@ -8,6 +8,9 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.eduxy.demo.dao.ChatRoomDAO;
 import com.eduxy.demo.dao.MessageDAO;
@@ -17,9 +20,11 @@ import com.eduxy.demo.exception.InternalException;
 import com.eduxy.demo.model.ChatRoom;
 import com.eduxy.demo.model.Message;
 import com.eduxy.demo.service.ChatRoomService;
-import com.eduxy.demo.service.WebSocketEventListener;
 
-@Controller
+
+@CrossOrigin(origins="http://localhost:4200")
+@RestController
+@RequestMapping("ChatRoomAPI")
 public class ChatRoomAPI {
 
 //	    @Autowired
@@ -42,11 +47,11 @@ public class ChatRoomAPI {
 	    @Autowired
 	    private EntityManager entityManager;
 	    
-	    @MessageMapping("/chat")
+	    @MessageMapping("/chat/")
 	    public void sendMessage(Message chatMessage , SimpMessageHeaderAccessor headerAccessor) {
 	        String sessionId = headerAccessor.getSessionId();
 	        headerAccessor.setSessionId(sessionId);
-
+            System.out.println("dshalfjdshuioAYE8FHSJKAFFSGZULSD.............................................................hfyuiugjgfyufrtydukduffghddfghgffy");
 	        ChatRoom chatroom = chatroomService.findChatroomBySenderIdAndRecipientId(chatMessage.getSenderId(),chatMessage.getRecipientId());
 	        String chatroomId = "";
 	        if(chatroom==null){

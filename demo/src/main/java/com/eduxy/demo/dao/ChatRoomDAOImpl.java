@@ -28,8 +28,16 @@ public class ChatRoomDAOImpl implements ChatRoomDAO {
 		query.setParameter(1,senderId);
 		query.setParameter(2,recipientId);
 		List<ChatRoomEntity> chatRoomEntity =query.getResultList();
-		ChatRoom chatRoom =modelMapper.map(chatRoomEntity.get(0),ChatRoom.class);
-		return chatRoom;
+		for(ChatRoomEntity chat : chatRoomEntity) {
+			ChatRoom chatRoom =modelMapper.map(chat,ChatRoom.class);
+			return chatRoom;
+		}
+			
+		
+
+
+		
+		return null;
 	}
 	
 	@Override
