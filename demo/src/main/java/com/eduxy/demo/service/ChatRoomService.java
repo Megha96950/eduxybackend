@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.eduxy.demo.dao.ChatRoomDAO;
 import com.eduxy.demo.model.ChatRoom;
+import com.eduxy.demo.model.Message;
 
 @Service
 @Transactional
@@ -28,4 +29,10 @@ public class ChatRoomService {
 			return true;
 				return false;
 	}
+   
+   public void createMessage(Message chatMessage) {
+	   String messageId =chatRoomDAO.createMessage(chatMessage);
+	  
+	   
+   }
 }

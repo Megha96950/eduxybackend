@@ -51,7 +51,7 @@ public class ChatRoomAPI {
 	    public void sendMessage(Message chatMessage , SimpMessageHeaderAccessor headerAccessor) {
 	        String sessionId = headerAccessor.getSessionId();
 	        headerAccessor.setSessionId(sessionId);
-            System.out.println("dshalfjdshuioAYE8FHSJKAFFSGZULSD.............................................................hfyuiugjgfyufrtydukduffghddfghgffy");
+          
 	        ChatRoom chatroom = chatroomService.findChatroomBySenderIdAndRecipientId(chatMessage.getSenderId(),chatMessage.getRecipientId());
 	        String chatroomId = "";
 	        if(chatroom==null){
@@ -66,11 +66,15 @@ public class ChatRoomAPI {
 	        chatroomId = chatroom.getChatroomId();
 	        }
 	        chatMessage.setChatroomId(chatroomId);
+	        System.out.println(chatMessage.getChatroomId());
 	        Message saved = null;
 	        try{
 	         //   saved = messageRepository.save(chatMessage);
-	        	MessageEntity messageentity=modelMapper.map(chatMessage,MessageEntity.class);
-	        	entityManager.persist(messageentity);
+	        	 // System.out.println("dshalfjdshuioAYE8FHSJKAFFSGZULSD.............................................................hfyuiugjgfyufrtydukduffghddfghgffy");
+//	        	MessageEntity messageentity=modelMapper.map(chatMessage,MessageEntity.class);
+//	        	  System.out.println(messageentity.getContent());
+//	        	entityManager.persist(messageentity);
+	        	  chatroomService.createMessage(chatMessage);
 	        }
 	        catch(Exception ex){
 	            throw new InternalException("Cannot create new message in chatroomId "+ chatroomId);
