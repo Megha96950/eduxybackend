@@ -47,23 +47,24 @@ public class UserWSAPI {
 	            u.setStatus("OFFLINE");
 	            return u;
 	        }).collect(Collectors.toList());
-	       
+	        Set<OnlineUserDto>onlsSet = webSocketEventListener.getOnlineUsrs();
 	        try{
-	            Set<OnlineUserDto>onlsSet = webSocketEventListener.getOnlineUsrs();
-	            if(onlsSet!=null){
-	            	
-	                List<OnlineUserDto>onls = onlsSet.stream().collect(Collectors.toList());
+	          if(onlsSet!=null){
+	            	List<OnlineUserDto>onls = onlsSet.stream().collect(Collectors.toList());
 	                onls.forEach(o->{
-	                	System.out.println("gjHGFUOYFOIEJFLKJEA"+ onls.get(0).getName());
+	                	System.out.println(currentUserId +" " +o.getEmailId());
 	                    int count = messageService.countNewMessagesFromOnlineUser(currentUserId, o.getEmailId());
-	                    System.out.println("gjHGFUOYFOIEJFLKJEAhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-	                    o.setNoOfNewMessages(count);
+	                   	                    o.setNoOfNewMessages(count);
 	                    o.setStatus("ONLINE");
 	                });
 	                usersWithStatus.addAll(onls);
 	                List<OnlineUserDto> finalOnls = onls;
 	                offlineUsers.forEach(u->{
 	                    if(finalOnls.stream().map(OnlineUserDto::getName).collect(Collectors.toList()).contains(u.getName())==false){
+	                    	System.out.println(u.getEmailId());
+	                        int count = messageService.countNewMessagesFromOnlineUser(currentUserId, u.getEmailId());
+		                   
+		                    u.setNoOfNewMessages(count);
 	                        usersWithStatus.add(u);
 	                    }
 	                });
@@ -74,6 +75,7 @@ public class UserWSAPI {
 
 	        }
 	        catch(Exception ex){
+	        	System.out.println(ex.getMessage());
 	            throw new InternalException("Cannot get the number of online users");
 	        }
 	        return ResponseEntity.ok(usersWithStatus);

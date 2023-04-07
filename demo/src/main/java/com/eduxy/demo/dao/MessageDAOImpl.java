@@ -57,17 +57,16 @@ public class MessageDAOImpl implements MessageDAO{
 	@Override
 	public int countNewMessagesFromOnlineUser(String currentUserId, String onlineUserId) {
 	
-		Query query =entityManager.createQuery("SELECT COUNT(*) FROM MessageEntity m"
+		Query query =entityManager.createQuery("Select count(*) FROM MessageEntity m"
 				+ " WHERE m.recipientId = ?1 AND"
 				+ " m.senderId = ?2 AND"
 				+ " m.status = 'RECEIVED'");
 		query.setParameter(1,currentUserId);
-		query.setParameter(1,onlineUserId);
+		query.setParameter(2,onlineUserId);
+		 
+		Long count =(Long)query.getResultList().get(0);
 	
-		int count =query.getFirstResult();
-			//	.getResultList();
-		System.out.println("jhgjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj"+count);
-		return count;
+		return count.intValue();
 	}
 	@Override
 	@Transactional

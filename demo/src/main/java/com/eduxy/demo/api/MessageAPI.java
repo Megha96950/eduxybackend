@@ -36,7 +36,7 @@ public class MessageAPI {
         try{
         	
             List<Message> msgs = messageService.findChatMessagesFromSelectedUser(senderId, recipientId);
-            
+        
             messageService.updateMessagesStatusToDelivered(msgs);
 
             ChatRoom cr = chatroomService.findChatroomBySenderIdAndRecipientId(senderId, recipientId);
