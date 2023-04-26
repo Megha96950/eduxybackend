@@ -41,12 +41,14 @@ public class UserWSAPI {
 	    public ResponseEntity<List<OnlineUserDto>> getOnlineUsers(@PathVariable String currentUserId) {
 	    	
 	        List<OnlineUserDto>usersWithStatus = new ArrayList<>();
-            List<User> users =userService.getAllUsers();
+            List<User> users =userService.getFriendListFor(currentUserId);
+            if(users!=null) {
 	        List<OnlineUserDto>offlineUsers = users.stream().map(u->modelMapper.map(u,OnlineUserDto.class)).collect(Collectors.toList());
 	        offlineUsers.stream().map(u->{
 	            u.setStatus("OFFLINE");
 	            return u;
 	        }).collect(Collectors.toList());
+	        
 	        Set<OnlineUserDto>onlsSet = webSocketEventListener.getOnlineUsrs();
 	        try{
 	          if(onlsSet!=null){
@@ -74,9 +76,11 @@ public class UserWSAPI {
 	            }
 
 	        }
+	        
 	        catch(Exception ex){
 	        	System.out.println(ex.getMessage());
 	            throw new InternalException("Cannot get the number of online users");
+	        }
 	        }
 	        return ResponseEntity.ok(usersWithStatus);
 	       // return ResponseEntity.ok(offlineUsers);
